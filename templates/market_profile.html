@@ -10,7 +10,7 @@
   <h3>Market Info</h3>
 
   <p><b>Day:</b> {{ market.market_day }}</p>
- <p><b>Time:</b>{{ market.market_start }} - {{ market.market_end }}</p>
+ <p><b>Time: </b> {{ market.market_start.strftime('%I:%M %p') }}-{{ market.market_end.strftime('%I:%M %p') }}</p>
 
  <p><b>Location:</b></p>
  <p>{{ street}}</p>

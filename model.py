@@ -42,7 +42,7 @@ class Market(db.Model):
 
     market_day = db.Column(db.String(32), nullable=False)
 
-    market_start = db.Column(db.Time)
+    market_start = db.Column(db.Time(timezone=True))
 
     market_end = db.Column(db.Time)
 

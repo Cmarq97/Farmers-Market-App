@@ -50,7 +50,6 @@ def market_profile(market_id):
     street = location.address_street
     city = location.address_city
     state = location.address_state
-
     return render_template(
 
         "market_profile.html", market=market, street=street, city=city, state=state)

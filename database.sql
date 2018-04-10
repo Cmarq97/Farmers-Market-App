@@ -41,7 +41,7 @@ INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity)
 VALUES ('La Vie', 'Drinklavie.com', 'Fresh Juice');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity)
-VALUES ('Lone Oak Ranch', 'ThefarmerandtheDale.com', 'Fruit, Vegtables');
+VALUES ('Lone Oak Ranch', 'ThefarmerandtheDale.com', 'Fruit, Vegetables');
 
 --Market Vendors
 
