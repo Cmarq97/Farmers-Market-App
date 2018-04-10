@@ -46,11 +46,7 @@ class Market(db.Model):
 
     market_end = db.Column(db.Time)
 
-    address = db.relationship("Address",
-
-                              backref=db.backref("market",
-
-                                                 order_by=market_name))
+    address = db.relationship("Address")
 
     def __repr__(self):
 
@@ -69,15 +65,11 @@ class Address(db.Model):
 
     address_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 
-    market_id = db.Column(db.Integer,
-
-                          db.ForeignKey('markets.market_id'))
-
     address_street = db.Column(db.String(64), nullable=False)
 
     address_city = db.Column(db.String(32), nullable=False)
 
-    address_state = db.Column(db.String(32), default='CA')
+    address_state = db.Column(db.String(32), server_default='CA')
 
     address_zip = db.Column(db.String(32))
 

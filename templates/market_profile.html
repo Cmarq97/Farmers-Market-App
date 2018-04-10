@@ -1,0 +1,18 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+  <h1>{{ market.market_name }}</h1>
+
+  <h3>Market Info</h3>
+
+  <p><b>Day:</b> {{ market.market_day }}</p>
+ <p><b>Time:</b>{{ market.market_start }} - {{ market.market_end }}</p>
+
+ <p><b>Location:</b></p>
+ <p>{{ street}}</p>
+ <p>{{ city }}, {{ state }}</p>
+{% endblock %}

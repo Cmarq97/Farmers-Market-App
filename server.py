@@ -13,7 +13,7 @@ from flask import (Flask, render_template, redirect, request, flash,
 
                    session)
 
-#from model import User, Market, Vendor, connect_to_db, db
+from model import User, Market, Vendor, Address, MarketVendor, connect_to_db, db
 
 app = Flask(__name__)
 
@@ -28,6 +28,32 @@ def homepage():
     """Homepage."""
 
     return render_template("homepage.html")
+
+
+@app.route('/markets')
+def display_markets():
+    """ Display all markets """
+
+    markets = Market.query.all()
+
+    return render_template("markets.html", markets=markets)
+
+
+@app.route('/markets/<market_id>/')
+def market_profile(market_id):
+
+    """Show info about Market. """
+
+    market = Market.query.get(market_id)
+    address = market.address_id
+    location = Address.query.get(address)
+    street = location.address_street
+    city = location.address_city
+    state = location.address_state
+
+    return render_template(
+
+        "market_profile.html", market=market, street=street, city=city, state=state)
 
 
 if __name__ == "__main__":
