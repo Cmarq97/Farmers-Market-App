@@ -56,6 +56,27 @@ def market_profile(market_id):
         "market_profile.html", market=market, street=street, city=city, state=state)
 
 
+@app.route('/vendors')
+def display_vendors():
+    """ Display all vendors """
+
+    vendors = Vendor.query.all()
+
+    return render_template("vendors.html", vendors=vendors)
+
+
+@app.route('/vendors/<vendor_id>/')
+def vendor_profile(vendor_id):
+
+    """Show info about Vendor. """
+
+    vendor = Vendor.query.get(vendor_id)
+    #FIND ALL MARKETS FOR VENDOR
+
+    return render_template(
+
+        "vendor_profile.html", vendor=vendor)
+
 if __name__ == "__main__":
 
     app.debug = True
