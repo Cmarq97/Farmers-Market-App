@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<h1>Vendors</h1>
+
+<p>List of all vendors in our database:</p>
+
+<ul>
+
+    <!-- Lists all vendors in vendors table and allows each name to be a clickable link leading to the vendor profile page-->
+
+    {% for vendor in vendors %}
+
+      <li>
+
+        <a href="/vendors/{{ vendor.vendor_id }}">{{ vendor.vendor_name }}</a>
+
+      </li>
+
+    {% endfor %}
+
+  </ul>
+
+{% endblock %}
