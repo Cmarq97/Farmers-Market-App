@@ -2,34 +2,34 @@
 INSERT INTO users (email, password) VALUES ('admin@email.com', 'adminpass');
 INSERT INTO users (email, password) VALUES ('cmarq97@gmail.com', 'password');
 
--- Add addresses
-
-INSERT INTO addresses (address_id, address_street, address_city, address_zip)
-VALUES (1, 'Alvarado St', 'Monterey', '93940');
-
-INSERT INTO addresses (address_id, address_street, address_city)
-VALUES (2, '424 Main St', 'Pleasonton');
-
-INSERT INTO addresses (address_id, address_street, address_city)
-VALUES (3, '205 Railroad Ave', 'Danville');
-
-INSERT INTO addresses (address_id, address_street, address_city)
-VALUES (4, '1326 9th Ave', 'San Francisco');
 
 -- Add Markets
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, address_id)
-VALUES ('Monterey', 'Tuesday', '16:00', '20:00', 1);
+INSERT INTO markets (market_name, market_day, market_start, market_end)
+VALUES ('Monterey', 'Tuesday', '16:00', '20:00');
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, address_id)
-VALUES ('Pleasonton', 'Saturday', '09:00', '13:00', 2);
+INSERT INTO markets (market_name, market_day, market_start, market_end)
+VALUES ('Pleasonton', 'Saturday', '09:00', '13:00');
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, address_id)
-VALUES ('Danville', 'Saturday', '09:00', '13:00', 3);
+INSERT INTO markets (market_name, market_day, market_start, market_end)
+VALUES ('Danville', 'Saturday', '09:00', '13:00');
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, address_id)
-VALUES ('SF Inner Sunset', 'Sunday', '09:00', '13:00', 4);
+INSERT INTO markets (market_name, market_day, market_start, market_end)
+VALUES ('SF Inner Sunset', 'Sunday', '09:00', '13:00');
 
+-- Add addresses
+
+INSERT INTO addresses (address_id, market_id, address_street, address_city, address_zip)
+VALUES (1, 1, 'Alvarado St', 'Monterey', '93940');
+
+INSERT INTO addresses (address_id, market_id, address_street, address_city)
+VALUES (2, 2, '424 Main St', 'Pleasonton');
+
+INSERT INTO addresses (address_id, market_id, address_street, address_city)
+VALUES (3, 3, '205 Railroad Ave', 'Danville');
+
+INSERT INTO addresses (address_id, market_id, address_street, address_city)
+VALUES (4, 4,'1326 9th Ave', 'San Francisco');
 
 
 --insert Vendors 

@@ -1,16 +1,15 @@
 {% extends 'base.html' %}
-
 {% block content %}
-
-
-
 <h1>Markets</h1>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYanwYmEgnTNrEr42tDxegSIPvGOSj6qU"></script>
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="/static/marketMap.js"></script>
 
 <p>List of all Markets in our database:</p>
 
 <ul>
 
-    <!-- Lists all markets in markets table and allows each name to be a clickable link leading to the market profile page-->
+    <!--Lists all markets in markets table and allows each name to be a clickable link leading to the market profile page-->
 
     {% for market in markets %}
 
@@ -24,4 +23,6 @@
 
   </ul>
 
+
+<div id="market-map"></div>
 {% endblock %}

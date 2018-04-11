@@ -3,8 +3,11 @@
 
 {% block content %}
 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYanwYmEgnTNrEr42tDxegSIPvGOSj6qU"></script>
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="/static/indivMarketMap.js"></script>
 
-
+<input id='market_id' type='hidden' value={{ market.market_id }}>
   <h1>{{ market.market_name }}</h1>
 
   <h3>Market Info</h3>
@@ -13,6 +16,7 @@
  <p><b>Time: </b> {{ market.market_start.strftime('%I:%M %p') }}-{{ market.market_end.strftime('%I:%M %p') }}</p>
 
  <p><b>Location:</b></p>
- <p>{{ street}}</p>
- <p>{{ city }}, {{ state }}</p>
+ <p>{{ market.address.address_street}}</p>
+ <p>{{ market.address.address_city }}, {{ market.address.address_state }}</p>
+<div id="market-map"></div>
 {% endblock %}

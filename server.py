@@ -3,13 +3,9 @@
 
 from jinja2 import StrictUndefined
 
-from flask import Flask
-
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import connect_to_db, db
-
-from flask import (Flask, render_template, redirect, request, flash,
+from flask import (Flask, render_template, redirect, request, flash, jsonify,
 
                    session)
 
@@ -45,14 +41,20 @@ def market_profile(market_id):
     """Show info about Market. """
 
     market = Market.query.get(market_id)
-    address = market.address_id
-    location = Address.query.get(address)
-    street = location.address_street
-    city = location.address_city
-    state = location.address_state
     return render_template(
 
-        "market_profile.html", market=market, street=street, city=city, state=state)
+        "market_profile.html", market=market)
+
+
+@app.route('/market/<market_id>.json')
+def market_json(market_id):
+    market = Market.query.get(market_id)
+    address = " ".join([market.address.address_street, market.address.address_city, market.address.address_state])
+    market_info = {
+        'address': address,
+        'name': market.market_name
+    }
+    return jsonify(market_info)
 
 
 @app.route('/vendors')
@@ -75,6 +77,26 @@ def vendor_profile(vendor_id):
     return render_template(
 
         "vendor_profile.html", vendor=vendor)
+
+
+@app.route('/markets.json')
+def market_info():
+    """JSON information about markets."""
+    markets = {}
+
+    for market in Market.query.all():
+        address = " ".join([market.address.address_street, market.address.address_city, market.address.address_state])
+        market_data = {
+            "marketId": market.market_id,
+            "name": market.market_name,
+            "day": market.market_day,
+            "startTime": market.market_start.strftime('%I:%M %p'),
+            "endTime": market.market_end.strftime('%I:%M %p'),
+            "address": address
+        }
+        markets[market.market_name] = market_data
+    return jsonify(markets)
+
 
 if __name__ == "__main__":
 

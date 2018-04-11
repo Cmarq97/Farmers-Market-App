@@ -34,10 +34,6 @@ class Market(db.Model):
 
     market_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 
-    address_id = db.Column(db.Integer,
-
-                           db.ForeignKey('addresses.address_id'))
-
     market_name = db.Column(db.String(64), nullable=False)
 
     market_day = db.Column(db.String(32), nullable=False)
@@ -46,7 +42,7 @@ class Market(db.Model):
 
     market_end = db.Column(db.Time)
 
-    address = db.relationship("Address")
+    address = db.relationship("Address", uselist=False)
 
     def __repr__(self):
 
@@ -65,21 +61,25 @@ class Address(db.Model):
 
     address_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 
+    market_id = db.Column(db.Integer, db.ForeignKey('markets.market_id'), nullable=False)
+
     address_street = db.Column(db.String(64), nullable=False)
 
     address_city = db.Column(db.String(32), nullable=False)
 
     address_state = db.Column(db.String(32), server_default='CA')
 
-    address_zip = db.Column(db.String(32))
+    address_zip = db.Column(db.String(32), nullable=True)
+
+    market = db.relationship("Market", backref=db.backref("addresses"))
 
     def __repr__(self):
 
         """Represent market address info when printed."""
 
-        return "<Address market_id={} address_id={} address_street={}, address_city={}, addresses_zip={}>".format(
+        return "<Address market_id={} address_id={} address_street={}, address_city={}, address_zip={}>".format(
 
-            self.market_id, self.address_id, self.address_street, self.address_city, self.addresses_zip)
+            self.market_id, self.address_id, self.address_street, self.address_city, self.address_zip)
 
 
 class Vendor(db.Model):

@@ -10,3 +10,26 @@
 
 <p><b>Commodities:</b> {{ vendor.vendor_commodity }}</p>
 {% endblock %}
+
+<h1>Markets</h1>
+
+<p>List of all Markets in our database:</p>
+
+<ul>
+
+    <!--Lists all markets in markets table and allows each name to be a clickable link leading to the market profile page-->
+
+    {% for market in markets %}
+
+      <li>
+
+        <a href="/markets/{{ market.market_id }}">{{ market.market_name }}</a>
+
+      </li>
+
+    {% endfor %}
+
+  </ul>
+
+
+   <div id="market-map"></div>
