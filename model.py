@@ -42,45 +42,15 @@ class Market(db.Model):
 
     market_end = db.Column(db.Time)
 
-    address = db.relationship("Address", uselist=False)
+    market_address = db.Column(db.String(250), nullable=False)
 
     def __repr__(self):
 
         """Represent market info when printed."""
 
-        return "<Market market_id={} market_name={} market_day={}>".format(
+        return "<Market market_id={} market_name={} market_day={} market_address={}>".format(
 
-            self.market_id, self.market_name, self.market_day)
-
-
-class Address(db.Model):
-
-    """Addresses for Markets from Farmer's Market website."""
-
-    __tablename__ = "addresses"
-
-    address_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-
-    market_id = db.Column(db.Integer, db.ForeignKey('markets.market_id'), nullable=False)
-
-    address_street = db.Column(db.String(64), nullable=False)
-
-    address_city = db.Column(db.String(32), nullable=False)
-
-    address_state = db.Column(db.String(32), server_default='CA')
-
-    address_zip = db.Column(db.String(32), nullable=True)
-
-    market = db.relationship("Market", backref=db.backref("addresses"))
-
-    def __repr__(self):
-
-        """Represent market address info when printed."""
-
-        return "<Address market_id={} address_id={} address_street={}, address_city={}, address_zip={}>".format(
-
-            self.market_id, self.address_id, self.address_street, self.address_city, self.address_zip)
-
+            self.market_id, self.market_name, self.market_day, self.market_address)
 
 class Vendor(db.Model):
 
@@ -96,6 +66,10 @@ class Vendor(db.Model):
 
     vendor_commodity = db.Column(db.String(250), nullable=False)
 
+    map_icon = db.Column(db.String(250), nullable=True)
+
+    markets = db.relationship("Market", backref='vendors', secondary="marketvendors", uselist=True)
+ 
     def __repr__(self):
 
         """Represent market info when printed."""

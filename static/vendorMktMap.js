@@ -1,7 +1,6 @@
 function initMap() {
-
     // Specify where the map is centered
-    let myLatLng = {lat: 37.4, lng: -122};
+    let myLatLng = {lat: 37.3, lng: -122};
 
     // Create a map object and specify the DOM element for display.
     let map = new google.maps.Map(document.getElementById('market-map'), {
@@ -18,17 +17,16 @@ function initMap() {
     let infoWindow = new google.maps.InfoWindow({
         width: 150
     });
-
+    vendor_id = $('#vendor_id').val();
     // Retrieving the information with AJAX
-    $.get('/markets.json', function (markets) {
+    $.get('/vendors/' + vendor_id + '/json', function (markets) {
       // JSON looks like:
-    // address = " ".join([market.address.address_street, market.address.address_city, market.address.address_state])
     // market_data = {
     // "marketId": market.market_id,
     // "day": market.market_day,
     // "startTime": market.market_start.strftime('%I:%M %p'),
     // "endTime": market.market_end.strftime('%I:%M %p'),
-    // "address": address
+    // "address": market.market_address
     // }
 
       let market, marker, html;
@@ -42,13 +40,12 @@ function initMap() {
       function addMarketByAddress(market) {
         let market_location = new google.maps.Geocoder();
         let address = market.address;
-
         market_location.geocode({'address': address},
           function(results, status) {
             if (status === google.maps.GeocoderStatus.OK) {
               marker = new google.maps.Marker({
                 title: market.market_name,
-                icon: '/static/img/market.png',
+                icon: market.icon,
                 map: map,
                 position: results[0].geometry.location
               });
@@ -58,7 +55,7 @@ function initMap() {
                     '<p><b>Market Name: </b>' + market.name + '</p>' +
                     '<p><b>Day: </b>' + market.day + '</p>' +
                     '<p><b>Time: </b>' + market.startTime + '-' + market.endTime + '</p>' +
-                    '<p><b>Address: </b>' + market.address + '</p>' + 
+                    '<p><b>Address: </b>' + market.address + '</p>' +
               '</div>');
               
               bindInfoWindow(marker, map, infoWindow, html);

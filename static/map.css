@@ -1,4 +1,14 @@
+body {
+    background-image: url("https://www.trashedgraphics.com/wp-content/uploads/2013/01/checkerborard_background_02.jpg");
+}
+p {
+    background-color: YellowGreen
+}
+/*div {
+    background-color: YellowGreen
+}*/
 #market-map{
     height: 400px;
     width: 400px;
+    background-color: transparent;
 }

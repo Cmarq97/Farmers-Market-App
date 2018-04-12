@@ -9,10 +9,11 @@ function initMap() {
         zoomControl: true,
         panControl: false,
         streetViewControl: false,
+        styles: MAPSTYLES
     });
     market_id = $('#market_id').val();
     // Retrieving the information with AJAX
-    $.get('/market/' + market_id + '.json', function (market_info){
+    $.get('/markets/' + market_id + '.json', function (market_info){
 
         let market_location = new google.maps.Geocoder();
         let address = market_info.address;
@@ -23,6 +24,7 @@ function initMap() {
               marker = new google.maps.Marker({
                 title: market_info.name,
                 map: map,
+                icon: '/static/img/market.png',
                 position: results[0].geometry.location
               });
             } else {

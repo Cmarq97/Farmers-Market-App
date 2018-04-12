@@ -1,35 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYanwYmEgnTNrEr42tDxegSIPvGOSj6qU"></script>
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="/static/vendorMktMap.js"></script>
+<script src="/static/mapstyles.js"></script>
+<input id='vendor_id' type='hidden' value={{ vendor.vendor_id }}>
 
   <h1>{{ vendor.vendor_name }}</h1>
 
   <h3>Vendor Info</h3>
 
 <p><b>Commodities:</b> {{ vendor.vendor_commodity }}</p>
+
+<div id="market-map"></div>
 {% endblock %}
 
-<h1>Markets</h1>
-
-<p>List of all Markets in our database:</p>
-
-<ul>
-
-    <!--Lists all markets in markets table and allows each name to be a clickable link leading to the market profile page-->
-
-    {% for market in markets %}
-
-      <li>
-
-        <a href="/markets/{{ market.market_id }}">{{ market.market_name }}</a>
-
-      </li>
-
-    {% endfor %}
-
-  </ul>
-
-
-   <div id="market-map"></div>

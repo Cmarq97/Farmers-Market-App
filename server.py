@@ -9,7 +9,7 @@ from flask import (Flask, render_template, redirect, request, flash, jsonify,
 
                    session)
 
-from model import User, Market, Vendor, Address, MarketVendor, connect_to_db, db
+from model import User, Market, Vendor, MarketVendor, connect_to_db, db
 
 app = Flask(__name__)
 
@@ -46,12 +46,12 @@ def market_profile(market_id):
         "market_profile.html", market=market)
 
 
-@app.route('/market/<market_id>.json')
+@app.route('/markets/<market_id>.json')
 def market_json(market_id):
     market = Market.query.get(market_id)
-    address = " ".join([market.address.address_street, market.address.address_city, market.address.address_state])
+
     market_info = {
-        'address': address,
+        'address': market.market_address,
         'name': market.market_name
     }
     return jsonify(market_info)
@@ -85,18 +85,35 @@ def market_info():
     markets = {}
 
     for market in Market.query.all():
-        address = " ".join([market.address.address_street, market.address.address_city, market.address.address_state])
         market_data = {
             "marketId": market.market_id,
             "name": market.market_name,
             "day": market.market_day,
             "startTime": market.market_start.strftime('%I:%M %p'),
             "endTime": market.market_end.strftime('%I:%M %p'),
-            "address": address
+            "address": market.market_address
         }
         markets[market.market_name] = market_data
     return jsonify(markets)
 
+
+@app.route('/vendors/<vendor_id>/json')
+def vendor_info_json(vendor_id):
+    """JSON information about specific vendors markets."""
+    markets = {}
+    vendor = Vendor.query.get(vendor_id)
+    for market in vendor.markets:
+        market_data = {
+            "marketId": market.market_id,
+            "name": market.market_name,
+            "day": market.market_day,
+            "startTime": market.market_start.strftime('%I:%M %p'),
+            "endTime": market.market_end.strftime('%I:%M %p'),
+            "address": market.market_address,
+            "icon": vendor.map_icon
+        }
+        markets[market.market_name] = market_data
+    return jsonify(markets)
 
 if __name__ == "__main__":
 
