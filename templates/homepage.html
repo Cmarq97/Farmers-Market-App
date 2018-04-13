@@ -4,12 +4,30 @@
 
 
 <div>
-<h1>Homepage</h1>
-<img src="https://media.giphy.com/media/l4FGBE6xf8x9Xn8ME/giphy.gif">
-<p>Welcome to your local Farmer's Market database!!! </p>
-
-<div><a href="/markets">View all Markets</a></div>
-
-<div><a href="/vendors">View all Vendors</a></div>
+<h1>Welcome to your local Farmer's Market database!!! </h1>
+<h2 id='link'><a href="/markets">View all Markets</a> &nbsp; <a href="/vendors">View all Vendors</a></h2>
 </div>
+<br>
+<form id= "form" action='/search' method=post>
+
+    <br>Search Keyword:
+    <input type="text" name="keyword"><br><br>
+    <input type="radio" name="searchby"value="vendor">Search for Vendors<br>
+    <input type="radio" name="searchby" value="commodity">Search for Vendors by Commodity<br>
+    <input type="radio" name="searchby" value="market">Search for Market by Name<br>
+    <input type="radio" name= "searchby"value="address">Search for Market by Address<br><br>
+    <fieldset>
+    <input type="checkbox" name="day[]" value="Sunday">Sunday
+    <input type="checkbox" name="day[]" value="Monday">Monday
+    <input type="checkbox" name="day[]" value="Tuesday">Tuesday
+    <input type="checkbox" name="day[]" value="Wednesday">Wednesday
+    <input type="checkbox" name="day[]" value="Thursday">Thursday
+    <input type="checkbox" name="day[]" value="Friday">Friday
+    <input type="checkbox" name="day[]" value="Saturday">Saturday<br><br>
+    </fieldset>
+    <input type="submit" name="submit" value="Search">
+
+</form> 
+<img src="https://media.giphy.com/media/l4FGBE6xf8x9Xn8ME/giphy.gif">
+
 {% endblock %}

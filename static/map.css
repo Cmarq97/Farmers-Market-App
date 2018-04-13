@@ -4,11 +4,16 @@ body {
 p {
     background-color: YellowGreen
 }
-/*div {
+ul {
     background-color: YellowGreen
-}*/
+}
+#form{
+    background-color: White
+}
+#link{
+    background-color: White
+}
 #market-map{
     height: 400px;
     width: 400px;
-    background-color: transparent;
 }

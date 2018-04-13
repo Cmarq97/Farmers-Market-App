@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1> Search Results:</h1>
+
+
+{% if search == 'market' or search == 'address' %}
+
+{% for market in results %}
+    <ul> 
+        <li><b>{{ market.market_name }}</b><br>
+        <b>Day: </b> {{market.market_day}}<br>
+        <b>Hours: </b> {{ market.market_start.strftime('%I:%M %p') }}-{{ market.market_end.strftime('%I:%M %p') }}<br> 
+        <b>Location: </b> {{market.market_address}}<br></li> 
+        <a href="/markets/{{ market.market_id }}">Link to {{ market.market_name }} Page</a>
+    </ul>
+{% endfor %}
+
+{% endif %}
+
+{% if search == 'vendor' or search == 'commodity' %}
+
+{% for vendor in results %}
+    <ul> 
+        <li><b>{{ vendor.vendor_name }}</b><br>
+        <a href="/vendors/{{ vendor.vendor_id }}">Link to {{ vendor.vendor_name }} Page</a></li>
+    </ul>
+{% endfor %}
+
+{% endif %}
+<p> End of Results. </p>
+{% endblock %}

@@ -1,5 +1,6 @@
 """ Farmers Market App """
 
+from sqlalchemy import and_
 
 from jinja2 import StrictUndefined
 
@@ -13,7 +14,7 @@ from model import User, Market, Vendor, MarketVendor, connect_to_db, db
 
 app = Flask(__name__)
 
-app.secret_key = "FARMLYF"
+app.secret_key = "FARMLIFE"
 
 app.jinja_env.undefined = StrictUndefined
 
@@ -24,6 +25,38 @@ def homepage():
     """Homepage."""
 
     return render_template("homepage.html")
+
+
+@app.route('/search', methods=['GET', 'POST'])
+def search_results():
+    """ Displays results of a vendor search"""
+    search_by = request.form.get("searchby")
+    keyword = request.form.get("keyword")
+    days = request.form.getlist("day[]")
+    print days
+
+    if search_by == "vendor":  # if vendor seach box was selected
+        results = Vendor.query.filter(Vendor.vendor_name.ilike('%' + keyword + '%'))
+
+    elif search_by == "market":
+        if days:
+            results = Market.query.filter(Market.market_day.in_(days)).filter(Market.market_name.ilike('%' + keyword + '%'))
+        else:
+            results = Market.query.filter(Market.market_name.ilike('%' + keyword + '%'))
+
+    elif search_by == "address":
+        if days:
+            results = Market.query.filter(Market.market_day.in_(days)).filter(Market.market_address.ilike('%' + keyword + '%'))
+        else:
+            results = Market.query.filter(Market.market_address.ilike('%' + keyword + '%'))
+
+    elif search_by == "commodity":
+        results = Vendor.query.filter(Vendor.vendor_commodity.ilike('%' + keyword + '%'))
+
+    else:
+        return render_template('homepage.html')
+
+    return render_template("results.html", search=search_by, results=results.all())
 
 
 @app.route('/markets')
