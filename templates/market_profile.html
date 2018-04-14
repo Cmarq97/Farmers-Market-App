@@ -13,10 +13,22 @@
 
   <h3>Market Info</h3>
 
-  <p><b>Day:</b> {{ market.market_day }}</p>
- <p><b>Time: </b> {{ market.market_start.strftime('%I:%M %p') }}-{{ market.market_end.strftime('%I:%M %p') }}</p>
+<p><b>Day:</b> {{ market.market_day }}</p>
+<p><b>Time: </b> {{ market.market_start.strftime('%I:%M %p') }}-{{ market.market_end.strftime('%I:%M %p') }}</p>
 
- <p><b>Location:</b></p>
- <p>{{ market.market_address}}</p>
+<p><b>Location:</b></p>
+<p>{{ market.market_address}}</p>
+<br>
+<b>Vendors at {{ market.market_name }}</b>
+ <ul>
+    <!-- Lists all vendors for specific market with link to vendor page-->
+
+    {% for vendor in vendors %}
+      <li>
+        <a href="/vendors/{{ vendor.vendor_id }}">{{ vendor.vendor_name }}</a>
+      </li>
+    {% endfor %}
+</ul>
+
 <div id="market-map"></div>
 {% endblock %}

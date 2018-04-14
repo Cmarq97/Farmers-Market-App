@@ -11,8 +11,24 @@
 
   <h3>Vendor Info</h3>
 
-<p><b>Commodities:</b> {{ vendor.vendor_commodity }}</p>
-
+<!-- <p><b>Commodities:</b> {{ vendor.vendor_commodity }}</p> -->
+<ul>
+<b>Commodities:</b>
+<br>
+{% for commodity in commodities %}
+    <li>{{ commodity }}</li>
+{% endfor %}
+</ul>
+<br>
+<ul>
+<b>Markets:</b>
+<br>
+{% for market in vendor.markets %}
+    <li>{{ market.market_name }}</li>
+    <li><a href="/markets/{{ market.market_id }}">Link to {{ market.market_name }} Page</a>
+</li>
+{% endfor %}
+</ul>
 <div id="market-map"></div>
 {% endblock %}
 

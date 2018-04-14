@@ -6,16 +6,16 @@ INSERT INTO users (email, password) VALUES ('cmarq97@gmail.com', 'password');
 -- Add Markets
 
 INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('Monterey', 'Tuesday', '16:00', '20:00', 'Alvarado St Monterey, CA 93940');
+VALUES ('Monterey Farmer''s Market', 'Tuesday', '16:00', '20:00', 'Alvarado St Monterey, CA 93940');
 
 INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('Pleasonton', 'Saturday', '09:00', '13:00', '424 Main St. Pleasonton, CA');
+VALUES ('Pleasonton Farmer''s Market', 'Saturday', '09:00', '13:00', '424 Main St. Pleasonton, CA');
 
 INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('Danville', 'Saturday', '09:00', '13:00', '205 Railroad Ave. Danville, CA');
+VALUES ('Danville Farmer''s Market', 'Saturday', '09:00', '13:00', '205 Railroad Ave. Danville, CA');
 
 INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('Inner Sunset', 'Sunday', '09:00', '13:00', '1326 9th Ave. San Francisco, CA');
+VALUES ('Inner Sunset Farmer''s Market', 'Sunday', '09:00', '13:00', '1326 9th Ave. San Francisco, CA');
 
 INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
 VALUES ('Brentwood Farmer''s Market', 'Saturday', '08:00', '12:00','655 First St., Brentwood, CA');
@@ -67,7 +67,7 @@ INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
 VALUES ('La Vie', 'Drinklavie.com', 'Fresh Juice', '/static/img/healthy-food.png');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
-VALUES ('Lone Oak Ranch', 'ThefarmerandtheDale.com', 'Fruit|Vegetables', '/static/img/vegetables.png');
+VALUES ('Lone Oak Ranch', 'ThefarmerandtheDale.com', 'Fruit', '/static/img/vegetables.png');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
 VALUES ('Shelly''s Farm', 'Facebook.com/shellysfarmfresh.com', 'Eggs', '/static/img/egg.png');

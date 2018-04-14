@@ -72,11 +72,11 @@ def display_markets():
 def market_profile(market_id):
 
     """Show info about Market. """
-
     market = Market.query.get(market_id)
+    vendors = market.vendors
     return render_template(
 
-        "market_profile.html", market=market)
+        "market_profile.html", market=market, vendors=vendors)
 
 
 @app.route('/markets/<market_id>.json')
@@ -106,10 +106,11 @@ def vendor_profile(vendor_id):
 
     vendor = Vendor.query.get(vendor_id)
     #FIND ALL MARKETS FOR VENDOR
-
+    commodities = vendor.vendor_commodity
+    commodity_list = commodities.split("|")
     return render_template(
 
-        "vendor_profile.html", vendor=vendor)
+        "vendor_profile.html", vendor=vendor, commodities=commodity_list)
 
 
 @app.route('/markets.json')
