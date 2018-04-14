@@ -113,7 +113,7 @@ def vendor_profile(vendor_id):
 
 
 @app.route('/markets.json')
-def market_info():
+def market_info_json():
     """JSON information about markets."""
     markets = {}
 

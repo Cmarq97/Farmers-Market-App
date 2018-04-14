@@ -1,10 +1,4 @@
 
-
-######### TEST DATABASE ##################
-
-
-
-
 -- Add Users
 INSERT INTO users (email, password) VALUES ('admin@email.com', 'adminpass');
 INSERT INTO users (email, password) VALUES ('cmarq97@gmail.com', 'password');

@@ -69,7 +69,7 @@ class Vendor(db.Model):
     map_icon = db.Column(db.String(250), nullable=True)
 
     markets = db.relationship("Market", backref='vendors', secondary="marketvendors", uselist=True)
- 
+
     def __repr__(self):
 
         """Represent market info when printed."""
@@ -93,28 +93,60 @@ class MarketVendor(db.Model):
 
                           db.ForeignKey('vendors.vendor_id'))
 
+
+def example_data():
+    """Create some sample data."""
+
+    # In case this is run more than once, empty out existing data
+    Vendor.query.delete()
+    Market.query.delete()
+    MarketVendor.query.delete()
+
+    mry = Market(market_name='Monterey', market_day='Tuesday', market_start='16:00',
+                 market_end='20:00', market_address='Alvarado St Monterey, CA 93940')
+
+    pls = Market(market_name='Pleasonton', market_day='Saturday', market_start='09:00',
+                 market_end='13:00', market_address='424 Main St. Pleasonton, CA')
+
+    dan = Market(market_name='Danville', market_day='Saturday', market_start='09:00',
+                 market_end='13:00', market_address='205 Railroad Ave. Danville, CA')
+
+    sun = Vendor(vendor_name='Sunrise Nursery', vendor_website='',
+                 vendor_commodity='Cut Flowers|Eggs', map_icon='/static/img/sunflower.png')
+
+    oak = Vendor(vendor_name='Lone Oak Ranch', vendor_website='ThefarmerandtheDale.com',
+                 vendor_commodity='Fruit|Vegetables', map_icon='/static/img/vegetables.png')
+
+    vie = Vendor(vendor_name='La Vie', vendor_website='DrinkLaVie.com',
+                 vendor_commodity='Fresh Juice', map_icon='/static/img/healthy-food.png')
+
+    sun1 = MarketVendor(market_id=1, vendor_id=1)
+    sun2 = MarketVendor(market_id=2, vendor_id=1)
+    sun3 = MarketVendor(market_id=3, vendor_id=1)
+
+    vie1 = MarketVendor(market_id=2, vendor_id=2)
+    vie2 = MarketVendor(market_id=3, vendor_id=2)
+
+    oak1 = MarketVendor(market_id=2, vendor_id=3)
+    oak2 = MarketVendor(market_id=3, vendor_id=3)
+
+    db.session.add_all([mry, pls, dan, sun, vie, oak, sun1, sun2, sun3,
+                        vie1, vie2, oak1, oak2])
+    db.session.commit()
+
+
 ######################### HELPER FCNS ###################################
 
 
-def connect_to_db(app):
-
-    """Connect the database to our Flask app."""
-    # Configure to use our PstgreSQL database
-
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///project'
-
+def connect_to_db(app, db_uri="postgresql:///project"):
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
     db.app = app
-
     db.init_app(app)
 
 
-if __name__ == "__main__":
-
+if __name__ == '__main__':
     from server import app
 
     connect_to_db(app)
-
     print "Connected to DB."
-    db.create_all()
