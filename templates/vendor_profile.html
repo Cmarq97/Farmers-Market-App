@@ -5,30 +5,37 @@
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="/static/vendorMktMap.js"></script>
 <script src="/static/mapstyles.js"></script>
+
 <input id='vendor_id' type='hidden' value={{ vendor.vendor_id }}>
 
-  <h1>{{ vendor.vendor_name }}</h1>
+<div class='container-fluid'>
 
-  <h3>Vendor Info</h3>
+<h1>{{ vendor.vendor_name }}</h1>
 
-<!-- <p><b>Commodities:</b> {{ vendor.vendor_commodity }}</p> -->
-<ul>
-<b>Commodities:</b>
-<br>
-{% for commodity in commodities %}
-    <li>{{ commodity }}</li>
-{% endfor %}
-</ul>
-<br>
-<ul>
-<b>Markets:</b>
-<br>
-{% for market in vendor.markets %}
-    <li>{{ market.market_name }}</li>
-    <li><a href="/markets/{{ market.market_id }}">Link to {{ market.market_name }} Page</a>
-</li>
-{% endfor %}
-</ul>
-<div id="market-map"></div>
+<h3>Vendor Info</h3>
+
+<div class="row">
+    <div class="col-xs-4">
+        <ul>
+            <b>Commodities:</b><br>
+            {% for commodity in commodities %}
+                <li>{{ commodity }}</li>
+            {% endfor %}
+        </ul><br>
+
+        <ul>
+            <b>Markets:</b><br>
+            {% for market in vendor.markets %}
+                <li>{{ market.market_name }}</li>
+                <a href="/markets/{{ market.market_id }}">Link to {{ market.market_name }} Page</a>
+            {% endfor %}
+        </ul>
+    </div>
+        
+    <div class="col-xs-6">
+            <div id="market-map"></div>
+    </div>
+</div>
+</div>
 {% endblock %}
 

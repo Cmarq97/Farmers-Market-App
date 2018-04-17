@@ -44,6 +44,8 @@ class Market(db.Model):
 
     market_address = db.Column(db.String(250), nullable=False)
 
+    market_city = db.Column(db.String(64), nullable=False)
+
     def __repr__(self):
 
         """Represent market info when printed."""
@@ -102,36 +104,28 @@ def example_data():
     Market.query.delete()
     MarketVendor.query.delete()
 
-    mry = Market(market_name='Monterey', market_day='Tuesday', market_start='16:00',
+    mry = Market(market_name="Monterey Farmer's Market", market_day='Tuesday', market_start='16:00',
                  market_end='20:00', market_address='Alvarado St Monterey, CA 93940')
 
-    pls = Market(market_name='Pleasonton', market_day='Saturday', market_start='09:00',
+    pls = Market(market_name="Pleasonton Farmer's Market", market_day='Saturday', market_start='09:00',
                  market_end='13:00', market_address='424 Main St. Pleasonton, CA')
 
-    dan = Market(market_name='Danville', market_day='Saturday', market_start='09:00',
+    dan = Market(market_name="Danville Farmer's Market", market_day='Saturday', market_start='09:00',
                  market_end='13:00', market_address='205 Railroad Ave. Danville, CA')
 
     sun = Vendor(vendor_name='Sunrise Nursery', vendor_website='',
-                 vendor_commodity='Cut Flowers|Eggs', map_icon='/static/img/sunflower.png')
+                 vendor_commodity='Cut Flowers|Eggs', map_icon='/static/img/sunflower.png',
+                 markets=[pls, dan, mry])
 
     oak = Vendor(vendor_name='Lone Oak Ranch', vendor_website='ThefarmerandtheDale.com',
-                 vendor_commodity='Fruit|Vegetables', map_icon='/static/img/vegetables.png')
+                 vendor_commodity='Fruit|Vegetables', map_icon='/static/img/vegetables.png',
+                 markets=[pls, dan])
 
     vie = Vendor(vendor_name='La Vie', vendor_website='DrinkLaVie.com',
-                 vendor_commodity='Fresh Juice', map_icon='/static/img/healthy-food.png')
+                 vendor_commodity='Fresh Juice', map_icon='/static/img/healthy-food.png',
+                 markets=[pls, dan])
 
-    sun1 = MarketVendor(market_id=1, vendor_id=1)
-    sun2 = MarketVendor(market_id=2, vendor_id=1)
-    sun3 = MarketVendor(market_id=3, vendor_id=1)
-
-    vie1 = MarketVendor(market_id=2, vendor_id=2)
-    vie2 = MarketVendor(market_id=3, vendor_id=2)
-
-    oak1 = MarketVendor(market_id=2, vendor_id=3)
-    oak2 = MarketVendor(market_id=3, vendor_id=3)
-
-    db.session.add_all([mry, pls, dan, sun, vie, oak, sun1, sun2, sun3,
-                        vie1, vie2, oak1, oak2])
+    db.session.add_all([mry, pls, dan, sun, vie, oak])
     db.session.commit()
 
 

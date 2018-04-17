@@ -12,6 +12,8 @@ from flask import (Flask, render_template, redirect, request, flash, jsonify,
 
 from model import User, Market, Vendor, MarketVendor, connect_to_db, db
 
+import requests
+
 app = Flask(__name__)
 
 app.secret_key = "FARMLIFE"
@@ -30,10 +32,10 @@ def homepage():
 @app.route('/search', methods=['GET', 'POST'])
 def search_results():
     """ Displays results of a vendor search"""
-    search_by = request.form.get("searchby")
+    search_by = request.form.get("search_by")
     keyword = request.form.get("keyword")
-    days = request.form.getlist("day[]")
-    print days
+    days = request.form.getlist("day")
+    # submit = request.form.get("submit")
 
     if search_by == "vendor":  # if vendor seach box was selected
         results = Vendor.query.filter(Vendor.vendor_name.ilike('%' + keyword + '%'))
@@ -105,9 +107,7 @@ def vendor_profile(vendor_id):
     """Show info about Vendor. """
 
     vendor = Vendor.query.get(vendor_id)
-    #FIND ALL MARKETS FOR VENDOR
-    commodities = vendor.vendor_commodity
-    commodity_list = commodities.split("|")
+    commodity_list = vendor.vendor_commodity.split("|")
     return render_template(
 
         "vendor_profile.html", vendor=vendor, commodities=commodity_list)
@@ -148,6 +148,20 @@ def vendor_info_json(vendor_id):
         }
         markets[market.market_name] = market_data
     return jsonify(markets)
+
+
+@app.route('/markets/<market_id>/weather')
+def get_market_weather(market_id):
+    market = Market.query.get(market_id)
+    city = market.market_city
+    api_key = '2b567d4c7398383e9dabfe1f94e814e3'
+
+    r = requests.get('http://api.openweathermap.org/data/2.5/weather?q=' +
+                     city + ',us&units=imperial&mode=html&appid=' + api_key)
+    html = r.content.decode('utf-8')
+
+    return html
+
 
 if __name__ == "__main__":
 

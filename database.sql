@@ -5,59 +5,59 @@ INSERT INTO users (email, password) VALUES ('cmarq97@gmail.com', 'password');
 
 -- Add Markets
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('Monterey Farmer''s Market', 'Tuesday', '16:00', '20:00', 'Alvarado St Monterey, CA 93940');
+INSERT INTO markets (market_name, market_day, market_start, market_end, market_address, market_city)
+VALUES ('Monterey Farmer''s Market', 'Tuesday', '16:00', '20:00', 'Alvarado St Monterey, CA 93940', 'Monterey');
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('Pleasonton Farmer''s Market', 'Saturday', '09:00', '13:00', '424 Main St. Pleasonton, CA');
+INSERT INTO markets (market_name, market_day, market_start, market_end, market_address, market_city)
+VALUES ('Pleasanton Farmer''s Market', 'Saturday', '09:00', '13:00', '424 Main St. Pleasonton, CA', 'Pleasanton');
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('Danville Farmer''s Market', 'Saturday', '09:00', '13:00', '205 Railroad Ave. Danville, CA');
+INSERT INTO markets (market_name, market_day, market_start, market_end, market_address, market_city)
+VALUES ('Danville Farmer''s Market', 'Saturday', '09:00', '13:00', '205 Railroad Ave. Danville, CA', 'Danville');
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('Inner Sunset Farmer''s Market', 'Sunday', '09:00', '13:00', '1326 9th Ave. San Francisco, CA');
+INSERT INTO markets (market_name, market_day, market_start, market_end, market_address, market_city)
+VALUES ('Inner Sunset Farmer''s Market', 'Sunday', '09:00', '13:00', '1326 9th Ave. San Francisco, CA', 'San Francisco');
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('Brentwood Farmer''s Market', 'Saturday', '08:00', '12:00','655 First St., Brentwood, CA');
+INSERT INTO markets (market_name, market_day, market_start, market_end, market_address, market_city)
+VALUES ('Brentwood Farmer''s Market', 'Saturday', '08:00', '12:00','655 First St. Brentwood, CA', 'Brentwood');
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('Concord Farmer''s Market', 'Tuesday', '10:00', '14:00', '2100 Salvio St., Concord, CA');
+INSERT INTO markets (market_name, market_day, market_start, market_end, market_address, market_city)
+VALUES ('Concord Farmer''s Market', 'Tuesday', '10:00', '14:00', '2100 Salvio St. Concord, CA', 'Concord');
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('Pittsburg Farmer''s Market', 'Saturday', '09:00', '13:00', '544 Railroad Ave., Pittsburg, CA');
+INSERT INTO markets (market_name, market_day, market_start, market_end, market_address, market_city)
+VALUES ('Pittsburg Farmer''s Market', 'Saturday', '09:00', '13:00', '544 Railroad Ave. Pittsburg, CA', 'Pittsburg');
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('Vallejo Farmer''s Market', 'Saturday', '09:00', '14:00', '400 Georgia St., Vallejo, CA');
+INSERT INTO markets (market_name, market_day, market_start, market_end, market_address, market_city)
+VALUES ('Vallejo Farmer''s Market', 'Saturday', '09:00', '14:00', '400 Georgia St. Vallejo, CA', 'Vallejo');
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('Evergreen Farmer''s Market', 'Sunday & Wednesday', '09:00', '13:00', '4055 Evergreen Village Sq., San Jose, CA');
+INSERT INTO markets (market_name, market_day, market_start, market_end, market_address, market_city)
+VALUES ('Evergreen Farmer''s Market', 'Sunday & Wednesday', '09:00', '13:00', '4055 Evergreen Village Sq. San Jose, CA', 'San Jose');
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('Downtown San Leandro Farmer''s Market', 'Wednesday', '16:00', '20:00', '135 Parrott St., San Leandro, CA' );
+INSERT INTO markets (market_name, market_day, market_start, market_end, market_address, market_city)
+VALUES ('Downtown San Leandro Farmer''s Market', 'Wednesday', '16:00', '20:00', '135 Parrott St. San Leandro, CA', 'San Leandro' );
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('Contra Costa Farmer''s Market', 'Sunday', '09:00', '13:00', '1799 Locust St, Walnut Creek, CA');
+INSERT INTO markets (market_name, market_day, market_start, market_end, market_address, market_city)
+VALUES ('Contra Costa Farmer''s Market', 'Sunday', '09:00', '13:00', '1799 Locust St Walnut Creek, CA', 'Walnut Creek');
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('Jack London Square Farmer''s Market', 'Sunday', '10:00', '15:00', 'Webster St & Embarcadero West, Oakland, CA');
+INSERT INTO markets (market_name, market_day, market_start, market_end, market_address, market_city)
+VALUES ('Jack London Square Farmer''s Market', 'Sunday', '10:00', '15:00', 'Webster St & Embarcadero West Oakland, CA', 'Oakland');
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('Old Oakland Farmer''s Market', 'Friday', '09:00', '14:00', '9th St. & Broadway, Oakland, CA');
+INSERT INTO markets (market_name, market_day, market_start, market_end, market_address, market_city)
+VALUES ('Old Oakland Farmer''s Market', 'Friday', '09:00', '14:00', '9th St. & Broadway Oakland, CA', 'Oakland');
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('Willow Glen Farmer''s Market', 'Saturday', '09:00', '13:00', '2175 Lincoln Ave., San Jose, CA');
+INSERT INTO markets (market_name, market_day, market_start, market_end, market_address, market_city)
+VALUES ('Willow Glen Farmer''s Market', 'Saturday', '09:00', '13:00', '2175 Lincoln Ave. San Jose, CA', 'San Jose');
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('San Leandro Farmer''s Market at Bayfair', 'Saturday', '09:00', '13:00', '15555 E 14th St, San Leandro, CA');
+INSERT INTO markets (market_name, market_day, market_start, market_end, market_address, market_city)
+VALUES ('San Leandro Farmer''s Market at Bayfair', 'Saturday', '09:00', '13:00', '15555 E 14th St San Leandro, CA', 'San Leandro');
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('Campbell Farmer''s Market', 'Sunday', '09:00', '13:00', 'Campbell Ave & Central Ave, Campbell, CA');
+INSERT INTO markets (market_name, market_day, market_start, market_end, market_address, market_city)
+VALUES ('Campbell Farmer''s Market', 'Sunday', '09:00', '13:00', 'Campbell Ave & Central Ave Campbell, CA', 'Campbell');
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('Mountain View Farmer''s Market', 'Sunday', '09:00', '13:00', '600 W Evelyn Ave, Mountain View, CA');
+INSERT INTO markets (market_name, market_day, market_start, market_end, market_address, market_city)
+VALUES ('Mountain View Farmer''s Market', 'Sunday', '09:00', '13:00', '600 W Evelyn Ave Mountain View, CA', 'Mountain View');
 
-INSERT INTO markets (market_name, market_day, market_start, market_end, market_address)
-VALUES ('Divisadero Farmer''s Market', 'Sunday', '10:00', '14:00', '1301-1315 Grove St, San Francisco, CA');
+INSERT INTO markets (market_name, market_day, market_start, market_end, market_address, market_city)
+VALUES ('Divisadero Farmer''s Market', 'Sunday', '10:00', '14:00', '1301-1315 Grove St San Francisco, CA', 'San Francisco');
 --insert Vendors 
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)

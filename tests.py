@@ -30,13 +30,65 @@ class FlaskTestsDatabase(TestCase):
         db.session.close()
         db.drop_all()
 
-    def test_search(self):
-        result = self.client.post("/search",
-                                  data={"search_by": "address",
-                                        "keyword": "oakland",
-                                        "days": ['Friday']},
+    def test_search_address(self):
+        result = self.client.post('/search',
+                                  data=dict(search_by='address',
+                                            keyword='monterey'),
                                   follow_redirects=True)
-        self.assertIn("Old Oakland", result.data)
+
+        self.assertIn('Monterey', result.data)
+
+    def test_search_day(self):
+        result = self.client.post('/search',
+                                  data=dict(search_by='market',
+                                            keyword='market',
+                                            day=['Saturday']),
+                                  follow_redirects=True)
+
+        self.assertNotIn('Monterey', result.data)
+        self.assertIn('Danville', result.data)
+
+    def test_search_vendor(self):
+        result = self.client.post('/search',
+                                  data=dict(search_by='vendor',
+                                            keyword='sunrise'),
+                                  follow_redirects=True)
+
+        self.assertNotIn('La Vie', result.data)
+        self.assertIn('Sunrise', result.data)
+
+    def test_search_commodity(self):
+        result = self.client.post('/search',
+                                  data=dict(search_by='commodity',
+                                            keyword='flower'),
+                                  follow_redirects=True)
+
+        self.assertNotIn('La Vie', result.data)
+        self.assertIn('Sunrise', result.data)
+
+    def test_view_markets(self):
+        result = self.client.get('/markets')
+
+        self.assertNotIn('Welcome', result.data)
+        self.assertIn('Danville', result.data)
+        self.assertIn('Pleasonton', result.data)
+        self.assertIn('Monterey', result.data)
+
+    def test_market_profile_json(self):
+        result = self.client.get('/markets/1.json')
+        self.assertIn('"address": "Alvarado St Monterey, CA 93940"', result.data)
+        self.assertNotIn('Sunrise Nursery', result.data)
+
+    def test_markets_json(self):
+        result = self.client.get('/markets.json')
+        self.assertIn('"address": "Alvarado St Monterey, CA 93940"', result.data)
+        self.assertIn('"day": "Tuesday"', result.data)
+        self.assertIn('marketId": 3', result.data)
+
+    def test_vendor_profile_json(self):
+        result = self.client.get('/vendors/1/json')
+        self.assertIn('"address": "Alvarado St Monterey, CA 93940"', result.data)
+        self.assertIn('"address": "Alvarado St Monterey, CA 93940"', result.data)
 
 
 class FlaskTestsRoutes(TestCase):
@@ -77,7 +129,7 @@ class FlaskTestsRoutes(TestCase):
         """ Market profile html test """
         result = self.client.get("/markets/1/")
         self.assertEqual(result.status_code, 200)
-        self.assertIn('Market Name', result.data)
+        self.assertIn('Market Info', result.data)
 
     def test_search_homepage_redirect_route(self):
         """ Search results redirect to homepage html test """
