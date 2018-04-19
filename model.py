@@ -12,18 +12,49 @@ class User(db.Model):
 
     __tablename__ = "users"
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-
-    email = db.Column(db.String(64), nullable=True)
-
-    password = db.Column(db.String(64), nullable=True)
+    email = db.Column(db.String(64), nullable=False)
+    password = db.Column(db.String(250), nullable=False)
+    age = db.Column(db.Integer, nullable=True)
+    zipcode = db.Column(db.String(15), nullable=True)
 
     def __repr__(self):
 
         """Provide helpful representation when printed."""
 
         return "<User user_id={} email={}>".format(self.user_id,
-
                                                    self.email)
+
+
+class UserFavoriteVendors(db.Model):
+    """ Shows which vendors are a users favorite """
+    __tablename__ = "userfavoritevendors"
+
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+
+    user_id = db.Column(db.Integer,
+
+                        db.ForeignKey('users.user_id'))
+
+    vendor_id = db.Column(db.Integer,
+
+                          db.ForeignKey('vendors.vendor_id'))
+    user = db.relationship("User",
+                           backref=db.backref("vendors", order_by=vendor_id))
+
+
+class UserFavoriteMarkets(db.Model):
+    """ Shows which markets are a users favorite """
+    __tablename__ = "userfavoritemarkets"
+
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+
+    user_id = db.Column(db.Integer,
+
+                        db.ForeignKey('users.user_id'))
+
+    market_id = db.Column(db.Integer,
+
+                          db.ForeignKey('markets.market_id'))
 
 
 class Market(db.Model):
@@ -33,17 +64,11 @@ class Market(db.Model):
     __tablename__ = "markets"
 
     market_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-
     market_name = db.Column(db.String(64), nullable=False)
-
     market_day = db.Column(db.String(32), nullable=False)
-
     market_start = db.Column(db.Time(timezone=True))
-
     market_end = db.Column(db.Time)
-
     market_address = db.Column(db.String(250), nullable=False)
-
     market_city = db.Column(db.String(64), nullable=False)
 
     def __repr__(self):
@@ -54,6 +79,7 @@ class Market(db.Model):
 
             self.market_id, self.market_name, self.market_day, self.market_address)
 
+
 class Vendor(db.Model):
 
     """Vendors from Farmer's Market website."""
@@ -61,15 +87,10 @@ class Vendor(db.Model):
     __tablename__ = "vendors"
 
     vendor_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-
     vendor_name = db.Column(db.String(64), nullable=False)
-
     vendor_website = db.Column(db.String(250))
-
     vendor_commodity = db.Column(db.String(250), nullable=False)
-
     map_icon = db.Column(db.String(250), nullable=True)
-
     markets = db.relationship("Market", backref='vendors', secondary="marketvendors", uselist=True)
 
     def __repr__(self):

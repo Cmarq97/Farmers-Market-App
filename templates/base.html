@@ -8,12 +8,26 @@
     <title>Bay Area Farmer's Markets</title>
 </head>
 
-<h3><a href="/">Go to Home Page</a></h3>
-
 <body>
 
-  {% block content %} put your content here {% endblock %}
-  
+    <a href="/">Go to Home Page</a></h3>
+    &nbsp;&nbsp;&nbsp;
+    {% if "user_id" in session %}
+      <a href="/logout">Logout</a>
+    {% else %}
+      <a href="/">Login</a>
+    {% endif %}
+
+    <hr>
+
+    {% for flash in get_flashed_messages() %}
+      {{ flash }}
+    {% endfor %}
+
+
+    {% block content %} put your content here {% endblock %}
+
+
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
 

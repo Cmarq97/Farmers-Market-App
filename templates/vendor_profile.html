@@ -26,8 +26,7 @@
         <ul>
             <b>Markets:</b><br>
             {% for market in vendor.markets %}
-                <li>{{ market.market_name }}</li>
-                <a href="/markets/{{ market.market_id }}">Link to {{ market.market_name }} Page</a>
+                <li><a href="/markets/{{ market.market_id }}">{{ market.market_name }}</a></li>
             {% endfor %}
         </ul>
     </div>

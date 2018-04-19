@@ -2,36 +2,68 @@
 
 {% block content %}
 
-
-<div>
-<h1>Welcome to your local Farmer's Market database!!! </h1>
+<div class="container-fluid">
+<h1 class="text-center">Welcome to Your Local Farmer's Market Database!</h1>
 <img src="/static/img/fmheader.jpg">
-<h2 id='link'><a href="/markets">View all Markets</a> <br> <a href="/vendors">View all Vendors</a></h2>
 </div>
-<br>
-<form id= "form" action='/search' method=post>
 
-    <br><b>Search Keyword:</b>
-    <input type="text" name="keyword"><br><br>
-    <fieldset>
-    <b>Search By: </b><br>
-    <input type="radio" name="search_by"value="vendor">Vendor Name<br>
-    <input type="radio" name="search_by" value="commodity">Vendor Commodity<br>
-    <input type="radio" name="search_by" value="market">Market Name<br>
-    <input type="radio" name= "search_by"value="address">Market Address<br>
-    </fieldset>
-    <fieldset>
-    <b>Show Markets on:</b><br>
-    <input type="checkbox" name="day" value="Sunday">Sunday
-    <input type="checkbox" name="day" value="Monday">Monday
-    <input type="checkbox" name="day" value="Tuesday">Tuesday
-    <input type="checkbox" name="day" value="Wednesday">Wednesday
-    <input type="checkbox" name="day" value="Thursday">Thursday
-    <input type="checkbox" name="day" value="Friday">Friday
-    <input type="checkbox" name="day" value="Saturday">Saturday<br>
-    </fieldset>
-    <input type="submit" name="submit" value="Search">
+<div class="container-fluid">
+    <div class="row">
+        
+        <div class="col-xs-6">
+            <h1 class="text-center"><a href="/markets">View all Markets</a></h1>
+        </div>
+        <div class="col-xs-6"> 
+            <h1 class="text-center"><a href="/vendors">View all Vendors</a></h1>
+        </div>
+    </div>
 
-</form> 
+    <div class="row">
+        <div class="col-xs-8">
+            <div class="form-group">
+                <form id= "form" action='/search' method=post>
+
+                    <br><b>Search Keyword:</b>
+                    <input type="text" name="keyword"><br><br>
+                    <fieldset>
+                    <b>Search By: </b><br>
+                    <input type="radio" name="search_by"value="vendor">Vendor Name<br>
+                    <input type="radio" name="search_by" value="commodity">Vendor Commodity<br>
+                    <input type="radio" name="search_by" value="market">Market Name<br>
+                    <input type="radio" name= "search_by"value="address">Market Address<br>
+                    </fieldset>
+                    <br>
+                    <fieldset>
+                    <b>Show Markets on:</b><br>
+                    <input type="checkbox" name="day" value="Sunday">Sunday
+                    <input type="checkbox" name="day" value="Monday">Monday
+                    <input type="checkbox" name="day" value="Tuesday">Tuesday
+                    <input type="checkbox" name="day" value="Wednesday">Wednesday
+                    <input type="checkbox" name="day" value="Thursday">Thursday
+                    <input type="checkbox" name="day" value="Friday">Friday
+                    <input type="checkbox" name="day" value="Saturday">Saturday<br>
+                    </fieldset><br>
+                    <input type="submit" name="submit" value="Search">
+                </form>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div class="form-group">
+
+                <form action='/login' method=post>
+                    <b>Please Sign-In:</b><br>
+                {% for flash in get_flashed_messages() %}
+                    <br><b>{{ flash }}</b><br>
+                {% endfor %}
+                    <br>Email:<br>
+                    <input type="text" name="email"><br>
+                    <br>Password<br>
+                    <input type="password" name="password"><br><br>
+                    <input type="submit" name="submit" value="Login">
+                </form>
+            </div>
+        </div>
+    </div> 
+</div>
 
 {% endblock %}

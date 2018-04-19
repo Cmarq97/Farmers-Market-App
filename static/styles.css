@@ -1,0 +1,34 @@
+body {
+    background-image: url('img/background.jpg');
+}
+#weather {
+    background-color: YellowGreen
+}
+
+ul {
+    background-color: YellowGreen
+}
+#form{
+    background-color: White
+}
+#link{
+    background-color: White
+}
+#market-map{
+    height: 400px;
+    width: 400px;
+}
+.flip {
+    height: 199px;
+    width: 300px;
+    margin: 0 auto;
+}
+.flip img {
+    width: 300px;
+    height: auto;
+}
+.flip .back {
+    background: #2184cd;
+    color: #fff;
+    text-align: center;
+}

@@ -1,24 +1,25 @@
 """ Farmers Market App """
 
 from sqlalchemy import and_
-
 from jinja2 import StrictUndefined
-
 from flask_debugtoolbar import DebugToolbarExtension
-
 from flask import (Flask, render_template, redirect, request, flash, jsonify,
-
                    session)
-
-from model import User, Market, Vendor, MarketVendor, connect_to_db, db
-
+from model import User, Market, Vendor, MarketVendor, UserFavoriteMarkets, UserFavoriteVendors, connect_to_db, db
 import requests
+from passlib.hash import sha256_crypt
+
 
 app = Flask(__name__)
 
 app.secret_key = "FARMLIFE"
 
 app.jinja_env.undefined = StrictUndefined
+
+
+@app.route('/flip')
+def flip():
+    return render_template('flip.html')
 
 
 @app.route('/')
@@ -76,9 +77,41 @@ def market_profile(market_id):
     """Show info about Market. """
     market = Market.query.get(market_id)
     vendors = market.vendors
+    user_id = session.get("user_id")
+
+    if user_id:
+        user_favorite = UserFavoriteMarkets.query.filter_by(
+            market_id=market_id, user_id=user_id).first()
+
+    else:
+        user_favorite = None
+
     return render_template(
 
-        "market_profile.html", market=market, vendors=vendors)
+        "market_profile.html", market=market, vendors=vendors, favorite=user_favorite, user_id=user_id)
+
+
+@app.route('/markets/<market_id>/', methods=['POST'])
+def market_added_favorites(market_id, user_id):
+    """Add a market to favorites."""
+
+    # Get form variables
+    favorite = bool(request.form["favorite"])
+
+    user_id = session.get("user_id")
+    if not user_id:
+        raise Exception("No user logged in.")
+
+    # favorites = UserFavoriteMarkets.query.filter_by(user_id=user_id, market_id=market_id).first()
+
+    if favorite:
+        favorite = UserFavoriteMarkets(user_id=user_id, market_id=market_id)
+        flash("Favorite added.")
+        db.session.add(favorite)
+
+        db.session.commit()
+
+    return redirect('/markets/' + market_id + '/')
 
 
 @app.route('/markets/<market_id>.json')
@@ -161,6 +194,73 @@ def get_market_weather(market_id):
     html = r.content.decode('utf-8')
 
     return html
+
+
+@app.route('/register', methods=['GET'])
+def register_form():
+    """Show form for user signup."""
+
+    return render_template("registration.html")
+
+
+@app.route('/register', methods=['POST'])
+def register_process():
+    """Process registration."""
+
+    # Get form variables
+    email = request.form["email"]
+    password = request.form["password"]
+    age = int(request.form["age"])
+    zipcode = request.form["zipcode"]
+
+    hashpass = sha256_crypt.encrypt(password)
+
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        new_user = User(email=email, password=hashpass, age=age, zipcode=zipcode)
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        flash("User {} added.".format(email))
+    if user:
+        flash("User {} already exists. Please sign in".format(email))
+
+    return redirect("/")
+
+
+@app.route('/login', methods=['POST'])
+def login_process():
+    """Process login."""
+
+    # Get form variables
+    email = request.form["email"]
+    password = request.form["password"]
+
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        flash("No such user")
+        return redirect("/register")
+
+    if sha256_crypt.verify(password, user.password):
+        flash("Incorrect password")
+        return redirect("/")
+
+    session["user_id"] = user.user_id
+
+    flash("Logged in")
+    return redirect('/markets')
+
+
+@app.route('/logout')
+def logout():
+    """Log out."""
+
+    del session["user_id"]
+    # flash("Logged Out.")
+    return redirect("/")
 
 
 if __name__ == "__main__":
