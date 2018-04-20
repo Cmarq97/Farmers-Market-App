@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+    <h1>{{ user.email }}'s Favorites!</h1>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <b>Favorite Markets</b>
+            <ul>
+            {% for market in fav_markets %}
+                <li><a href="/markets/{{ market.market_id }}">{{ market.market_name }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+        <div class="col-xs-6">
+            <b>Favorite Vendors</b>
+            <ul>
+            {% for vendor in fav_vendors %}
+                <li><a href="/vendors/{{ vendor.vendor_id }}">{{ vendor.vendor_name }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

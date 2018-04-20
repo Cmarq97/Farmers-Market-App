@@ -3,6 +3,7 @@ INSERT INTO users (email, password) VALUES ('admin@email.com', 'adminpass');
 INSERT INTO users (email, password) VALUES ('cmarq97@gmail.com', 'password');
 
 
+
 -- Add Markets
 
 INSERT INTO markets (market_name, market_day, market_start, market_end, market_address, market_city)
@@ -60,8 +61,8 @@ INSERT INTO markets (market_name, market_day, market_start, market_end, market_a
 VALUES ('Divisadero Farmer''s Market', 'Sunday', '10:00', '14:00', '1301-1315 Grove St San Francisco, CA', 'San Francisco');
 --insert Vendors 
 
-INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
-VALUES ('Sunrise Nursery', '', 'Cut Flowers|Eggs', '/static/img/sunflower.png');
+INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon, credit)
+VALUES ('Sunrise Nursery', '', 'Cut Flowers|Eggs', '/static/img/sunflower.png', 'True');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
 VALUES ('La Vie', 'Drinklavie.com', 'Fresh Juice', '/static/img/healthy-food.png');
@@ -69,8 +70,8 @@ VALUES ('La Vie', 'Drinklavie.com', 'Fresh Juice', '/static/img/healthy-food.png
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
 VALUES ('Lone Oak Ranch', 'ThefarmerandtheDale.com', 'Fruit', '/static/img/vegetables.png');
 
-INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
-VALUES ('Shelly''s Farm', 'Facebook.com/shellysfarmfresh.com', 'Eggs', '/static/img/egg.png');
+INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon, credit)
+VALUES ('Shelly''s Farm', 'Facebook.com/shellysfarmfresh.com', 'Eggs', '/static/img/egg.png', 'True');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
 VALUES ('Prather Ranch Meat Co.', 'PratherRanch.com', 'Meat', '/static/img/steak.png');
@@ -78,8 +79,8 @@ VALUES ('Prather Ranch Meat Co.', 'PratherRanch.com', 'Meat', '/static/img/steak
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
 VALUES ('Hummus Heaven', '', 'Hummus', '/static/img/hummus.png');
 
-INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
-VALUES ('Smit Farms', '', 'Apples|Berries|Cherries', '/static/img/apple.png');
+INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon, credit, organic)
+VALUES ('Smit Farms', '', 'Apples|Berries|Cherries', '/static/img/apple.png', 'True', 'True');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
 VALUES ('J&M Ibarra Farms', '', 'Vegetables', '/static/img/vegetables.png');
@@ -232,5 +233,10 @@ INSERT INTO marketvendors (market_id, vendor_id) VALUES (10,19);
 INSERT INTO marketvendors (market_id, vendor_id) VALUES (12,19);
 INSERT INTO marketvendors (market_id, vendor_id) VALUES (18,19);
 
+--Add User Fav Markets
+INSERT INTO userfavoritemarkets (user_id, market_id) VALUES (2, 1);
+
+--Add User Fav Vendors
+INSERT INTO userfavoritevendors (user_id, vendor_id) VALUES (2, 1);
 
 

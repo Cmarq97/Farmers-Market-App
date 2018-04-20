@@ -5,7 +5,7 @@ from jinja2 import StrictUndefined
 from flask_debugtoolbar import DebugToolbarExtension
 from flask import (Flask, render_template, redirect, request, flash, jsonify,
                    session)
-from model import User, Market, Vendor, MarketVendor, UserFavoriteMarkets, UserFavoriteVendors, connect_to_db, db
+from model import User, Market, Vendor, MarketVendor, UserFavoriteMarket, UserFavoriteVendor, connect_to_db, db
 import requests
 from passlib.hash import sha256_crypt
 
@@ -71,7 +71,7 @@ def display_markets():
     return render_template("markets.html", markets=markets)
 
 
-@app.route('/markets/<market_id>/')
+@app.route('/markets/<market_id>', methods=['GET'])
 def market_profile(market_id):
 
     """Show info about Market. """
@@ -80,7 +80,7 @@ def market_profile(market_id):
     user_id = session.get("user_id")
 
     if user_id:
-        user_favorite = UserFavoriteMarkets.query.filter_by(
+        user_favorite = UserFavoriteMarket.query.filter_by(
             market_id=market_id, user_id=user_id).first()
 
     else:
@@ -91,27 +91,45 @@ def market_profile(market_id):
         "market_profile.html", market=market, vendors=vendors, favorite=user_favorite, user_id=user_id)
 
 
-@app.route('/markets/<market_id>/', methods=['POST'])
-def market_added_favorites(market_id, user_id):
+@app.route('/markets/<market_id>', methods=['POST'])
+def market_added_favorites(market_id):
     """Add a market to favorites."""
 
     # Get form variables
-    favorite = bool(request.form["favorite"])
+    favorite_market = int(request.form["favorite"])
 
     user_id = session.get("user_id")
     if not user_id:
-        raise Exception("No user logged in.")
+        flash("No User Logged In. Please Login!")
 
     # favorites = UserFavoriteMarkets.query.filter_by(user_id=user_id, market_id=market_id).first()
 
-    if favorite:
-        favorite = UserFavoriteMarkets(user_id=user_id, market_id=market_id)
+    else:
+        favorite = UserFavoriteMarket(user_id=user_id, market_id=favorite_market)
         flash("Favorite added.")
         db.session.add(favorite)
-
         db.session.commit()
 
-    return redirect('/markets/' + market_id + '/')
+    return redirect('/markets/' + market_id)
+
+
+@app.route('/vendors/<vendor_id>', methods=['POST'])
+def vendor_added_favorites(vendor_id):
+    """Add a vendor to favorites."""
+
+    # Get form variables
+    favorite_vendor = int(request.form["favorite"])
+
+    user_id = session.get("user_id")
+    if not user_id:
+        flash("No User Logged In. Please Login!")
+    else:
+        favorite = UserFavoriteVendor(user_id=user_id, vendor_id=favorite_vendor)
+        flash("Favorite added.")
+        db.session.add(favorite)
+        db.session.commit()
+
+    return redirect('/vendors/' + vendor_id)
 
 
 @app.route('/markets/<market_id>.json')
@@ -134,7 +152,7 @@ def display_vendors():
     return render_template("vendors.html", vendors=vendors)
 
 
-@app.route('/vendors/<vendor_id>/')
+@app.route('/vendors/<vendor_id>')
 def vendor_profile(vendor_id):
 
     """Show info about Vendor. """
@@ -261,6 +279,17 @@ def logout():
     del session["user_id"]
     # flash("Logged Out.")
     return redirect("/")
+
+
+@app.route('/favorites/<user_id>')
+def display_user_favorites(user_id):
+    user_id = session.get("user_id")
+    user = User.query.get(user_id)
+
+    markets = user.favorite_markets
+    vendors = user.favorite_vendors
+
+    return render_template("user_favorites.html", user=user, fav_vendors=vendors, fav_markets=markets)
 
 
 if __name__ == "__main__":

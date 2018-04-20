@@ -17,6 +17,9 @@ class User(db.Model):
     age = db.Column(db.Integer, nullable=True)
     zipcode = db.Column(db.String(15), nullable=True)
 
+    favorite_vendors = db.relationship("Vendor", secondary="userfavoritevendors")
+    favorite_markets = db.relationship("Market", secondary="userfavoritemarkets")
+
     def __repr__(self):
 
         """Provide helpful representation when printed."""
@@ -25,36 +28,32 @@ class User(db.Model):
                                                    self.email)
 
 
-class UserFavoriteVendors(db.Model):
+class UserFavoriteVendor(db.Model):
     """ Shows which vendors are a users favorite """
     __tablename__ = "userfavoritevendors"
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 
     user_id = db.Column(db.Integer,
-
                         db.ForeignKey('users.user_id'))
 
     vendor_id = db.Column(db.Integer,
-
                           db.ForeignKey('vendors.vendor_id'))
-    user = db.relationship("User",
-                           backref=db.backref("vendors", order_by=vendor_id))
 
 
-class UserFavoriteMarkets(db.Model):
+class UserFavoriteMarket(db.Model):
     """ Shows which markets are a users favorite """
     __tablename__ = "userfavoritemarkets"
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
 
     user_id = db.Column(db.Integer,
-
                         db.ForeignKey('users.user_id'))
 
     market_id = db.Column(db.Integer,
 
                           db.ForeignKey('markets.market_id'))
+    markets = db.relationship("Market")
 
 
 class Market(db.Model):
@@ -91,6 +90,8 @@ class Vendor(db.Model):
     vendor_website = db.Column(db.String(250))
     vendor_commodity = db.Column(db.String(250), nullable=False)
     map_icon = db.Column(db.String(250), nullable=True)
+    organic = db.Column(db.Boolean, nullable=True)
+    credit = db.Column(db.Boolean, nullable=True)
     markets = db.relationship("Market", backref='vendors', secondary="marketvendors", uselist=True)
 
     def __repr__(self):
@@ -162,6 +163,7 @@ def connect_to_db(app, db_uri="postgresql:///project"):
 
 if __name__ == '__main__':
     from server import app
-
     connect_to_db(app)
+    db.create_all()
+    print "Data Tables Created"
     print "Connected to DB."

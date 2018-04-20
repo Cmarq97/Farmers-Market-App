@@ -8,17 +8,17 @@
 <script src="/static/indivMarketMap.js"></script>
 <script src="/static/mapstyles.js"></script>
 <script src="/static/weather.js"></script>
-
+<script src="/static/favorite.js"></script>
 
 <input id='market_id' type='hidden' value={{ market.market_id }}>
 <h1>{{ market.market_name }}</h1>
 <div class='container-fluid'>
 
-<form action="/markets/{{ market.market_id }}/" method="POST">
+<form action="/markets/{{ market.market_id }}" method="post">
         <label>Favorite this Market:
-          <input type="button" name="Favorite" value=True>
+          <input type="hidden" name="favorite" value={{ market.market_id }}>
         </label>
-        <input type="submit" value="Submit">
+        <input id="favorite" type="submit" value="Favorite">
 </form>
 
 <div id='row'>

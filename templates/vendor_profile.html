@@ -5,6 +5,7 @@
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="/static/vendorMktMap.js"></script>
 <script src="/static/mapstyles.js"></script>
+<script src="/static/favorite.js"></script>
 
 <input id='vendor_id' type='hidden' value={{ vendor.vendor_id }}>
 
@@ -13,6 +14,14 @@
 <h1>{{ vendor.vendor_name }}</h1>
 
 <h3>Vendor Info</h3>
+
+<form action="/vendors/{{ vendor.vendor_id }}" method="post">
+        <label>Favorite this Vendor:
+          <input type="hidden" name="favorite" value={{ vendor.vendor_id }}>
+        </label>
+        <input id="favorite" type="submit" value="Favorite">
+</form>
+
 
 <div class="row">
     <div class="col-xs-4">
@@ -32,7 +41,15 @@
     </div>
         
     <div class="col-xs-6">
-            <div id="market-map"></div>
+        <div id="market-map"></div>
+        <ul>
+        {% if vendor.credit %}
+            <li><img src="/static/img/shopping-store.png"> Accepts Credit Cards</li>
+        {% endif %}
+        {% if vendor.organic %}
+            <li><img src="/static/img/organic.png"></li>
+        {% endif %}
+        </ul>
     </div>
 </div>
 </div>
