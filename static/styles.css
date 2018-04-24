@@ -18,17 +18,53 @@ ul {
     height: 400px;
     width: 400px;
 }
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
 .flip {
-    height: 199px;
-    width: 300px;
-    margin: 0 auto;
+  -webkit-perspective: 800;
+   width: 400px;
+   height: 200px;
+   position: relative;
+   margin: 50px auto;
 }
-.flip img {
-    width: 300px;
-    height: auto;
+.flip .card.flipped {
+  -webkit-transform:rotatey(-180deg); /* Safari and Chrome */
 }
-.flip .back {
-    background: #2184cd;
-    color: #fff;
-    text-align: center;
+.flip .card {
+  width: 100%;
+  height: 100%;
+  -webkit-transform-style: preserve-3d;
+  -webkit-transition: 0.5s;
+}
+.flip .card .face {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  /*z-index: 2;*/
+  font-family: Georgia;
+  font-size: 2em;
+  text-align: center;
+  line-height: 200px;
+  -webkit-backface-visibility: hidden; /* Safari & Chrome */
+}
+.flip .card .front {
+  position: absolute;
+  z-index: 1;
+  background: YellowGreen;
+  color: white;
+  cursor: pointer;
+}
+.flip .card .back {
+    /*background: blue;*/
+    background: white;
+    /*color: black;*/
+    cursor: pointer;
+    
+  transform:rotatey(-180deg);
+  -webkit-transform:rotatey(-180deg); /* Safari and Chrome */
 }

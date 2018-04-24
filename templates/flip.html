@@ -1,29 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-
-
-<head>
+<html>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
-</head>
+<script src="/static/flip.js"></script>
 
-<div class="flip"> 
-    <div class="front"> 
-        <img src="https://cdn1.medicalnewstoday.com/content/images/articles/318/318601/avocado-sliced.jpg" alt="">
-    </div> 
-    <div class="back">
-        <h3>Melonzzzzz!</h3>
-    </div> 
+<div class="container-fluid">
+    <div id='row'>
+        {% for vendor in vendors %}
+            <div class="col-xs-4">
+                <div class="flip"> 
+                  <div class="card"> 
+                    <div class="face front" style="background-image: url('/static/img/Flip/{{ vendor.vendor_name }}.jpg');">
+                        {{ vendor.vendor_name }}
+                    </div> 
+                    <div class="face back">
+                        {{ vendor.vendor_commodity }}
+                    </div> 
+                  </div> 
+            </div>
+            </div>   
+        {% endfor %}
+    </div>
 </div>
 
-<script>
-
-$(function(){
-    $(".flip").flip({
-        trigger: 'hover'
-    });
-});
-</script>
-
+</html>
 
 {% endblock %}

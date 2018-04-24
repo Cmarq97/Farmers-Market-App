@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
 <h1 class="text-center">Welcome to Your Local Farmer's Market Database!</h1>
-<img src="/static/img/fmheader.jpg">
+<img src="/static/img/fmheader.jpg" class="center">
 </div>
 
 <div class="container-fluid">
@@ -47,14 +47,21 @@
                 </form>
             </div>
         </div>
-        <div class="col-xs-2">
-            <div class="form-group">
+    </div> 
+</div>
 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Please Sign In</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <div class="form-group">
                 <form action='/login' method=post>
-                    <b>Please Sign-In:</b><br>
-                {% for flash in get_flashed_messages() %}
-                    <br><b>{{ flash }}</b><br>
-                {% endfor %}
                     <br>Email:<br>
                     <input type="text" name="email"><br>
                     <br>Password<br>
@@ -62,8 +69,9 @@
                     <input type="submit" name="submit" value="Login">
                 </form>
             </div>
-        </div>
-    </div> 
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock %}

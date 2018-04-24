@@ -1,25 +1,24 @@
 """ Farmers Market App """
-
-from sqlalchemy import and_
 from jinja2 import StrictUndefined
 from flask_debugtoolbar import DebugToolbarExtension
 from flask import (Flask, render_template, redirect, request, flash, jsonify,
                    session)
-from model import User, Market, Vendor, MarketVendor, UserFavoriteMarket, UserFavoriteVendor, connect_to_db, db
+from model import User, Market, Vendor, UserFavoriteMarket, UserFavoriteVendor, connect_to_db, db
 import requests
 from passlib.hash import sha256_crypt
 
 
 app = Flask(__name__)
 
-app.secret_key = "FARMLIFE"
+app.secret_key = "MARKETZ"
 
 app.jinja_env.undefined = StrictUndefined
 
 
 @app.route('/flip')
 def flip():
-    return render_template('flip.html')
+    vendors = Vendor.query.all()
+    return render_template('flip.html', vendors=vendors)
 
 
 @app.route('/')
@@ -36,7 +35,6 @@ def search_results():
     search_by = request.form.get("search_by")
     keyword = request.form.get("keyword")
     days = request.form.getlist("day")
-    # submit = request.form.get("submit")
 
     if search_by == "vendor":  # if vendor seach box was selected
         results = Vendor.query.filter(Vendor.vendor_name.ilike('%' + keyword + '%'))

@@ -12,9 +12,9 @@
     <a href="/">Go to Home Page</a></h3>
     &nbsp;&nbsp;&nbsp;
     {% if "user_id" in session %}
-      <a href="/logout">Logout</a>
+      <button type="button" class="btn btn-primary"><a href="/logout">Logout</a></button>
     {% else %}
-      <a href="/">Login</a>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Login</button>
     {% endif %}
 
     <hr>
