@@ -7,28 +7,56 @@
     <title>Bay Area Farmer's Markets</title>
 </head>
 
+<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light" style="background-color: YellowGreen;">
+    <div class="container-fluid">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">Bay Area Farmer's Markets</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/markets">View Markets</a></li>
+        <li><a href="/vendors">View Vendors</a></li>
+        <li>
+            {% if "user_id" in session %}
+                <a href="/logout">Logout</a></button>
+            {% else %}
+                <a href="#" data-toggle="modal" data-target="#exampleModal">Login</a>
+            {% endif %}
+        </li>
+    </ul>
+  </div>
+</nav>
+
 <body>
 
-    <a href="/">Go to Home Page</a></h3>
-    &nbsp;&nbsp;&nbsp;
-    {% if "user_id" in session %}
-      <button type="button" class="btn btn-primary"><a href="/logout">Logout</a></button>
-    {% else %}
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Login</button>
-    {% endif %}
+{% block content %} put your content here {% endblock %}
+    
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Please Sign In</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <div class="form-group">
+                <form action='/login' method=post>
+                    <br>Email:<br>
+                    <input type="text" name="email"><br>
+                    <br>Password<br>
+                    <input type="password" name="password"><br><br>
+                    <input type="submit" name="submit" value="Login">
+                </form>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <hr>
-
-    {% for flash in get_flashed_messages() %}
-      {{ flash }}
-    {% endfor %}
-
-
-    {% block content %} put your content here {% endblock %}
-
-
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
 
 </body>
 
