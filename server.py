@@ -6,7 +6,8 @@ from flask import (Flask, render_template, redirect, request, flash, jsonify,
 from model import User, Market, Vendor, UserFavoriteMarket, UserFavoriteVendor, connect_to_db, db
 import requests
 from passlib.hash import sha256_crypt
-
+from datetime import datetime
+from pytz import timezone
 
 app = Flask(__name__)
 
@@ -25,8 +26,14 @@ def flip():
 def homepage():
 
     """Homepage."""
+    """ Determines day of week and displays appropriate markets on homepage"""
+    days_dict = {6: "Sunday", 0: "Monday", 1: "Tuesday", 2: "Wednesday", 3: "Thursday", 4: "Friday", 5: "Saturday"}
 
-    return render_template("homepage.html")
+    now_utc = datetime.now(timezone('UTC'))
+    day = days_dict[now_utc.astimezone(timezone('US/Pacific')).weekday()]
+    results = Market.query.filter(Market.market_day == day)
+
+    return render_template("homepage.html", markets=results)
 
 
 @app.route('/search', methods=['GET', 'POST'])
@@ -99,6 +106,7 @@ def market_added_favorites(market_id):
     user_id = session.get("user_id")
     if not user_id:
         flash("No User Logged In. Please Login!")
+        return redirect("/login")
 
     # favorites = UserFavoriteMarkets.query.filter_by(user_id=user_id, market_id=market_id).first()
 
@@ -267,7 +275,7 @@ def login_process():
     session["user_id"] = user.user_id
 
     flash("Logged in")
-    return redirect('/markets')
+    return redirect('/')
 
 
 @app.route('/logout')

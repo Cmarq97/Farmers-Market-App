@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
 <h1 class="text-center">Welcome to Your Local Farmer's Market Database!</h1>
-<img src="/static/img/fmheader.jpg" class="center">
+<img src="http://www.fortvalleymainstreet.org/userfiles/Image/find-farmers-markets.jpg" class="center">
 </div>
 
 <div class="container-fluid">
@@ -19,8 +19,9 @@
     </div>
 
     <div class="row">
-        <div class="col-xs-8">
-            <div class="form-group">
+
+        <div class="col-xs-5">
+            <div class="form-group pull-right">
                 <form id= "form" action='/search' method=post>
 
                     <br><b>Search Keyword:</b>
@@ -46,6 +47,15 @@
                     <input type="submit" name="submit" value="Search">
                 </form>
             </div>
+        </div>
+        <div class="col-xs-4 pull-right">
+            <h1>Today's Farmer's Markets</h1>
+            <img src="https://blog.flamingtext.com/blog/2018/04/24/flamingtext_com_1524608142_332595135.png">
+            <ul>
+                {% for market in markets %}
+                    <li><a href="/markets/{{ market.market_id }}">{{ market.market_name }}</a></li>
+                {% endfor %}
+            </ul>
         </div>
     </div> 
 </div>
