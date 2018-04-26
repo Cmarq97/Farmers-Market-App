@@ -5,7 +5,7 @@ function initMap() {
 
     // Create a map object and specify the DOM element for display.
     let map = new google.maps.Map(document.getElementById('market-map'), {
-        center: myLatLng,
+        // center: myLatLng,
         scrollwheel: false,
         zoom: 8,
         zoomControl: true,
@@ -13,6 +13,17 @@ function initMap() {
         streetViewControl: false,
         styles: MAPSTYLES
     });
+
+    if (navigator.geolocation) {
+     navigator.geolocation.getCurrentPosition(function (position) {
+         initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          map.setCenter(initialLocation);
+         var userMarker = new google.maps.Marker({
+            position: initialLocation,
+            map: map,
+            icon: '/static/img/Icons/house.png'});
+     });
+    }
 
     // Allows us to create one info window and replace contents for each market marker
     let infoWindow = new google.maps.InfoWindow({
@@ -48,7 +59,7 @@ function initMap() {
             if (status === google.maps.GeocoderStatus.OK) {
               marker = new google.maps.Marker({
                 title: market.market_name,
-                icon: '/static/img/market.png',
+                icon: '/static/img/Icons/market.png',
                 map: map,
                 position: results[0].geometry.location
               });
@@ -63,11 +74,10 @@ function initMap() {
               
               bindInfoWindow(marker, map, infoWindow, html);
             } else {
-              alert('Geocode was not successful for the following reason: ' + status);
+              // alert('Geocode was not successful for the following reason: ' + status);
             }
         });
-            
-    function bindInfoWindow(marker, map, infoWindow, html) {
+        function bindInfoWindow(marker, map, infoWindow, html) {
         google.maps.event.addListener(marker, 'click', function () {
             infoWindow.close();
             infoWindow.setContent(html);

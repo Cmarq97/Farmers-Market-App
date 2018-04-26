@@ -13,6 +13,17 @@ function initMap() {
         styles: MAPSTYLES
     });
 
+    if (navigator.geolocation) {
+     navigator.geolocation.getCurrentPosition(function (position) {
+         initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+         map.setCenter(initialLocation);
+         var userMarker = new google.maps.Marker({
+            position: initialLocation,
+            map: map,
+            icon: '/static/img/Icons/house.png'});
+     });
+    }
+
     // Allows us to create one info window and replace contents for each market marker
     let infoWindow = new google.maps.InfoWindow({
         width: 150
@@ -60,7 +71,7 @@ function initMap() {
               
               bindInfoWindow(marker, map, infoWindow, html);
             } else {
-              alert('Geocode was not successful for the following reason: ' + status);
+              // alert('Geocode was not successful for the following reason: ' + status);
             }
         });
             

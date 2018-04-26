@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYanwYmEgnTNrEr42tDxegSIPvGOSj6qU"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}"></script>
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="/static/indivMarketMap.js"></script>
 <script src="/static/mapstyles.js"></script>
@@ -31,7 +31,7 @@
     </div>
     <div id='col-xs-3'>
         <h3>Market Info</h3>
-        <div id='weather-div'></div>
+        <span><div id='weather-div'></div></span>
     </div>
 </div>
 <div id='row'>

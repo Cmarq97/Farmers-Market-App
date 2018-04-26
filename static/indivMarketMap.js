@@ -5,12 +5,23 @@ function initMap() {
     let map = new google.maps.Map(document.getElementById('market-map'), {
         center: myLatLng,
         scrollwheel: false,
-        zoom: 5,
+        zoom: 8,
         zoomControl: true,
         panControl: false,
         streetViewControl: false,
         styles: MAPSTYLES
     });
+
+    if (navigator.geolocation) {
+     navigator.geolocation.getCurrentPosition(function (position) {
+         initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+         map.setCenter(initialLocation);
+         var userMarker = new google.maps.Marker({
+            position: initialLocation,
+            map: map,
+            icon: '/static/img/Icons/house.png'});
+     });
+    }
     market_id = $('#market_id').val();
     // Retrieving the information with AJAX
     $.get('/markets/' + market_id + '.json', function (market_info){
@@ -24,11 +35,11 @@ function initMap() {
               marker = new google.maps.Marker({
                 title: market_info.name,
                 map: map,
-                icon: '/static/img/market.png',
+                icon: '/static/img/Icons/market.png',
                 position: results[0].geometry.location
               });
             } else {
-              alert('Geocode was not successful for the following reason: ' + status);
+              // alert('Geocode was not successful for the following reason: ' + status);
 
             }
         })

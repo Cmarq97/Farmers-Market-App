@@ -62,61 +62,61 @@ VALUES ('Divisadero Farmer''s Market', 'Sunday', '10:00', '14:00', '1301-1315 Gr
 --insert Vendors 
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon, credit)
-VALUES ('Sunrise Nursery', '', 'Cut Flowers|Eggs', '/static/img/sunflower.png', 'True');
+VALUES ('Sunrise Nursery', '', 'Cut Flowers|Eggs', '/static/img/Icons/sunflower.png', 'True');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
-VALUES ('La Vie', 'Drinklavie.com', 'Fresh Juice', '/static/img/healthy-food.png');
+VALUES ('La Vie', 'Drinklavie.com', 'Fresh Juice', '/static/img/Icons/healthy-food.png');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
-VALUES ('Lone Oak Ranch', 'ThefarmerandtheDale.com', 'Fruit', '/static/img/vegetables.png');
+VALUES ('Lone Oak Ranch', 'ThefarmerandtheDale.com', 'Fruit', '/static/img/Icons/vegetables.png');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon, credit)
-VALUES ('Shelly''s Farm', 'Facebook.com/shellysfarmfresh.com', 'Eggs', '/static/img/egg.png', 'True');
+VALUES ('Shelly''s Farm', 'Facebook.com/shellysfarmfresh.com', 'Eggs', '/static/img/Icons/egg.png', 'True');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
-VALUES ('Prather Ranch Meat Co.', 'PratherRanch.com', 'Meat', '/static/img/steak.png');
+VALUES ('Prather Ranch Meat Co.', 'PratherRanch.com', 'Meat', '/static/img/Icons/steak.png');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
-VALUES ('Hummus Heaven', '', 'Hummus', '/static/img/hummus.png');
+VALUES ('Hummus Heaven', '', 'Hummus', '/static/img/Icons/hummus.png');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon, credit, organic)
-VALUES ('Smit Farms', '', 'Apples|Berries|Cherries', '/static/img/apple.png', 'True', 'True');
+VALUES ('Smit Farms', '', 'Apples|Berries|Cherries', '/static/img/Icons/apple.png', 'True', 'True');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
-VALUES ('J&M Ibarra Farms', '', 'Vegetables', '/static/img/vegetables.png');
+VALUES ('J&M Ibarra Farms', '', 'Vegetables', '/static/img/Icons/vegetables.png');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
-VALUES ('Foustmans', 'Foustmans.com', 'Salami', '/static/img/sausage.png');
+VALUES ('Foustmans', 'Foustmans.com', 'Salami', '/static/img/Icons/sausage.png');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity)
 VALUES ('That Garlic Stuff', 'Facebook.com/ThatGarlicStuff', 'Sauces');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
-VALUES ('Bella Fruit & Drinks', '', 'Cut Fruit|Juice', '/static/img/healthy-food.png');
+VALUES ('Bella Fruit & Drinks', '', 'Cut Fruit|Juice', '/static/img/Icons/healthy-food.png');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
-VALUES ('Jiquilipan Frutas y Aguas Frescas', '', 'Cut Fruit|Juice', '/static/img/healthy-food.png');
+VALUES ('Jiquilipan Frutas y Aguas Frescas', '', 'Cut Fruit|Juice', '/static/img/Icons/healthy-food.png');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
-VALUES ('Hall''s Organic Farm', '', 'Vegetables|Strawberries', '/static/img/vegetables.png');
+VALUES ('Hall''s Organic Farm', '', 'Vegetables|Strawberries', '/static/img/Icons/vegetables.png');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity)
 VALUES ('Cipponeri Family Farms', '', 'Fruits|Nuts|Melons');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
-VALUES ('Bistro Blends', 'BayAreaBistro.com', 'Olive Oil', '/static/img/olive-oil.png');
+VALUES ('Bistro Blends', 'BayAreaBistro.com', 'Olive Oil', '/static/img/Icons/olive-oil.png');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
-VALUES ('Great Valley Poultry', '', 'Eggs', '/static/img/egg.png');
+VALUES ('Great Valley Poultry', '', 'Eggs', '/static/img/Icons/egg.png');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity)
 VALUES ('Alonso Baking & Foods', '', 'Baked Goods');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
-VALUES ('Precious Puch Doggie Bakery', '', 'Dog Treats', '/static/img/snack.png');
+VALUES ('Precious Puch Doggie Bakery', '', 'Dog Treats', '/static/img/Icons/snack.png');
 
 INSERT INTO vendors (vendor_name, vendor_website, vendor_commodity, map_icon)
-VALUES ('Home Maid Ravioli', '', 'Ravioli|Pasta|Sauces|Olives', '/static/img/ravioli.png');
+VALUES ('Home Maid Ravioli', '', 'Ravioli|Pasta|Sauces|Olives', '/static/img/Icons/ravioli.png');
 --Market Vendors
 
 --Sunrise Nursery
