@@ -18,6 +18,9 @@ app.secret_key = "BAFM"
 
 app.jinja_env.undefined = StrictUndefined
 
+DAYS_DICT = {6: "Sunday", 0: "Monday", 1: "Tuesday", 2: "Wednesday",
+             3: "Thursday", 4: "Friday", 5: "Saturday"}
+
 
 @app.route('/vendors')
 def flip():
@@ -32,15 +35,13 @@ def homepage():
     """ Displays Homepage html && determines day of week and displays
          appropriate markets on homepage"""
 
-    days_dict = {6: "Sunday", 0: "Monday", 1: "Tuesday", 2: "Wednesday",
-                 3: "Thursday", 4: "Friday", 5: "Saturday"}
-
+    user_timezone = 'US/Pacific'
     # Takes current time in UTC, aware of TZ
     now_utc = datetime.now(timezone('UTC'))
 
     # Determines current day of the week in PST and determines the string
     #  value from days_dict
-    day = days_dict[now_utc.astimezone(timezone('US/Pacific')).weekday()]
+    day = DAYS_DICT[now_utc.astimezone(timezone(user_timezone)).weekday()]
 
     #  Searches db for markets on current day
     results = Market.query.filter(Market.market_day == day)
@@ -79,7 +80,7 @@ def search_results():
         results = Vendor.query.filter(
             Vendor.vendor_commodity.ilike('%' + keyword + '%'))
 
-    else:  # if search was not completed correctlty return home
+    else:  # if search was not completed correctly return home
         return render_template('homepage.html')
 
     return render_template("results.html",

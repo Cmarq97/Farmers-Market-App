@@ -1,20 +1,30 @@
 body {
     background-image: url('img/background.jpg');
 }
-#weather {
-    background-color: YellowGreen
+
+.cream {
+    background-color: FloralWhite;
+    padding: 20px;
 }
 
-ul {
-    background-color: YellowGreen
+
+#form {
+    background-color: FloralWhite;
+    padding: 20px;
 }
 
-span {
-  background-color: YellowGreen
+#nav-link{
+    color: white;
+    text-decoration: none;
+  }
+
+.green{
+    background-color: YellowGreen;
 }
-#form{
-    background-color: White
+.blue{
+  background-color: Blue;
 }
+
 #link{
     background-color: White
 }
@@ -28,6 +38,8 @@ span {
     margin-right: auto;
     width: 50%;
 }
+
+/****************************FLIP CARD CSS************************************/
 
 .flip {
   -webkit-perspective: 800;

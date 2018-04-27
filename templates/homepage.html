@@ -3,59 +3,67 @@
 {% block content %}
 
 <div class="container-fluid">
-<h1 class="text-center">Welcome to Your Local Farmer's Market Database!</h1>
-<img src="http://www.fortvalleymainstreet.org/userfiles/Image/find-farmers-markets.jpg" class="center">
-</div>
-
-<div class="container-fluid">
+    
     <div class="row">
-        
-        <div class="col-xs-6">
-            <h1 class="text-center"><a href="/markets">View all Markets</a></h1>
-        </div>
-        <div class="col-xs-6"> 
-            <h1 class="text-center"><a href="/vendors">View all Vendors</a></h1>
-        </div>
-    </div>
-
-    <div class="row">
-
-        <div class="col-xs-5">
-            <div class="form-group pull-right">
-                <form id= "form" action='/search' method=post>
-
-                    <br><b>Search Keyword:</b>
-                    <input type="text" name="keyword"><br><br>
-                    <fieldset>
-                    <b>Search By: </b><br>
-                    <input type="radio" name="search_by"value="vendor">Vendor Name<br>
-                    <input type="radio" name="search_by" value="commodity">Vendor Commodity<br>
-                    <input type="radio" name="search_by" value="market">Market Name<br>
-                    <input type="radio" name= "search_by"value="address">Market Address<br>
-                    </fieldset>
-                    <br>
-                    <fieldset>
-                    <b>Show Markets on:</b><br>
-                    <input type="checkbox" name="day" value="Sunday">Sunday
-                    <input type="checkbox" name="day" value="Monday">Monday
-                    <input type="checkbox" name="day" value="Tuesday">Tuesday
-                    <input type="checkbox" name="day" value="Wednesday">Wednesday
-                    <input type="checkbox" name="day" value="Thursday">Thursday
-                    <input type="checkbox" name="day" value="Friday">Friday
-                    <input type="checkbox" name="day" value="Saturday">Saturday<br>
-                    </fieldset><br>
-                    <input type="submit" name="submit" value="Search">
-                </form>
-            </div>
-        </div>
-        <div class="col-xs-4 pull-right">
+ <!--        <div class="col-xs-2"></div>
+        <div class="col-xs-8 green">
+            <img src="/static/img/farmers-market.jpg" style="height:300px; width:300px;">
             <h1>Today's Farmer's Markets</h1>
-            <img src="https://blog.flamingtext.com/blog/2018/04/24/flamingtext_com_1524608142_332595135.png">
             <ul>
                 {% for market in markets %}
                     <li><a href="/markets/{{ market.market_id }}">{{ market.market_name }}</a></li>
                 {% endfor %}
             </ul>
+        </div> -->
+    </div>
+
+    <div class="row">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-4 green">
+            <img src="/static/img/farmers-market.jpg" style="height:150px; width:500px;">
+            <ul>
+                {% for market in markets %}
+                    <li><a href="/markets/{{ market.market_id }}">{{ market.market_name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+
+        <div class="col-xs-6 pull-right">
+            <form id="form" action='/search' method=post>
+                <div class="form-group">
+                    <div class="form-horizantal">
+                        <h2>Search Your Local Farmer's Markets!
+                           <a href="/markets" class="btn btn-default btn-success" style="margin-left:25px;"><h4>View all Markets</h4></a>
+                           <a href="/vendors" class="btn btn-default btn-success" style="margin-left:25px;"><h4>View all Vendors</h4></a></h2>
+                        </div>
+                        <h3>Search By: </h3>
+                        <div class="btn-group">
+                        <input type="radio" name="search_by" value="vendor"> Vendor Name &nbsp;
+                        <input type="radio" name="search_by" value="commodity"> Vendor Commodity &nbsp;
+                        <input type="radio" name="search_by" value="market"> Market Name &nbsp;
+                        <input type="radio" name= "search_by"value="address"> Market Address &nbsp;
+                        </div>
+                        <br><br><h3>Search Keyword:</h3>
+                        <input type="text" name="keyword" class="form-control">
+                    </div><br>
+                    <h3>Filter Results By:</h3>
+                    <div class="btn-group-justified">
+                    <h4>
+                    <b>&nbsp;&nbsp;&nbsp;Market Day:</b>&nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" name="day" value="Sunday"> Sunday&nbsp;&nbsp;  
+                    <input type="checkbox" name="day" value="Monday"> Monday&nbsp;&nbsp;
+                    <input type="checkbox" name="day" value="Tuesday"> Tuesday&nbsp;&nbsp;
+                    <input type="checkbox" name="day" value="Wednesday"> Wednesday&nbsp;&nbsp;
+                    <input type="checkbox" name="day" value="Thursday"> Thursday&nbsp;&nbsp;
+                    <input type="checkbox" name="day" value="Friday"> Friday&nbsp;&nbsp;
+                    <input type="checkbox" name="day" value="Saturday"> Saturday<br>
+                    </h4>
+                    </div>
+                    <br>
+                    <input type="submit" class="btn-success btn btn-block" name="submit" value="Search">
+                </div>
+            </form>
         </div>
     </div> 
 </div>
