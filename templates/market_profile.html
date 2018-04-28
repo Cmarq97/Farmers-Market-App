@@ -1,55 +1,72 @@
-
 {% extends 'base.html' %}
 
 {% block content %}
-
+<head>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}"></script>
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="/static/indivMarketMap.js"></script>
 <script src="/static/mapstyles.js"></script>
 <script src="/static/weather.js"></script>
 <script src="/static/favorite.js"></script>
+</head>
 
+
+<div class="container-fluid">
 <input id='market_id' type='hidden' value={{ market.market_id }}>
-<h1>{{ market.market_name }}</h1>
-<div class='container-fluid'>
 
-<form action="/markets/{{ market.market_id }}" method="post">
-        <label>Favorite this Market:
-          <input type="hidden" name="favorite" value={{ market.market_id }}>
-        </label>
-        <input id="favorite" type="submit" value="Favorite">
-</form>
+    <div class="row green">
+        <div class="cream" style="margin: 20px; padding: 10px;">
+            <div class="row">
+                <div class="col-xs-10">
+                    <h1 class="border"> {{ market.market_name }} </h1>
+                </div>
+                <div class="col-xs-2 pull-right">
+                    <br><br>
+                    <form action="/markets/{{ market.market_id }}" method="post">
+                        <h4>Favorite this Market:&nbsp;
+                          <input type="hidden" name="favorite" value={{ market.market_id }}>
+                        
+                        <input id="favorite" class="btn btn-default btn-success" type="submit" value="Favorite"></h4>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
 
-<div id='row'>
-    <div id='col-xs-6'>
-        <br><p><b>Day:</b> {{ market.market_day }}</p>
-        <p><b>Time: </b> {{ market.market_start.strftime('%I:%M %p') }}-{{ market.market_end.strftime('%I:%M %p') }}</p>
+    <div class='row'>
+        <div class="col-xs-1"></div>
+        <div class='col-xs-4 green'>
+            <div class="cream">
+                <h2 class="border">Market Info</h2>
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <br><h4><b>Day:</b> {{ market.market_day }}</h4>
+                            <h4><b>Time: </b> {{ market.market_start.strftime('%I:%M %p') }}-{{ market.market_end.strftime('%I:%M %p') }}</h4>
 
-        <p><b>Location:</b></p>
-        <p>{{ market.market_address}}</p><br>
+                            <h4><b>Location:</b> {{ market.market_address}}</h4><br>
+                        </div>
+                        <div class="col-xs-4"><div id='weather-div'></div></div>
+                    </div>
+                <br><br>
+                <h3 class="border">Vendors at {{ market.market_name }}</h3>
+                <ul>
+                <!-- Lists all vendors for specific market with link to vendor page-->
+                {% for vendor in vendors %}
+                  <li>
+                    <h4><a href="/vendors/{{ vendor.vendor_id }}">{{ vendor.vendor_name }}</a></h4>
+                  </li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-xs-1"></div>
+        <div class='col-xs-3'>
+                <div id="market-map"></div>
+        </div>
     </div>
-    <div id='col-xs-3'>
-        <h3>Market Info</h3>
-        <span><div id='weather-div'></div></span>
-    </div>
-</div>
-<div id='row'>
-    <div id='col-xs-4'>
-        <b>Vendors at {{ market.market_name }}</b>
-         <ul>
-        <!-- Lists all vendors for specific market with link to vendor page-->
-        {% for vendor in vendors %}
-          <li>
-            <a href="/vendors/{{ vendor.vendor_id }}">{{ vendor.vendor_name }}</a>
-          </li>
-        {% endfor %}
-        </ul>
-    </div>
-</div>
-<div id='row'>
-    <div id="market-map"></div>
-</div>
+    <br><br><br>
 </div>
 
 {% endblock %}

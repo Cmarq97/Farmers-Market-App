@@ -20,6 +20,7 @@ function initMap() {
          var userMarker = new google.maps.Marker({
             position: initialLocation,
             map: map,
+            title: "Your Current Location",
             icon: '/static/img/Icons/house.png'});
      });
     }

@@ -34,7 +34,7 @@ def flip():
 def homepage():
     """ Displays Homepage html && determines day of week and displays
          appropriate markets on homepage"""
-
+    api_key = os.environ['GOOGLE_MAPS_API_KEY']
     user_timezone = 'US/Pacific'
     # Takes current time in UTC, aware of TZ
     now_utc = datetime.now(timezone('UTC'))
@@ -46,7 +46,36 @@ def homepage():
     #  Searches db for markets on current day
     results = Market.query.filter(Market.market_day == day)
 
-    return render_template("homepage.html", markets=results)
+    return render_template("homepage.html", markets=results, api_key=api_key)
+
+
+@app.route('/today/json')
+def today_market_info_json():
+    """ Creates JSON information about today's markets for later use in API's"""
+    user_timezone = 'US/Pacific'
+    # Takes current time in UTC, aware of TZ
+    now_utc = datetime.now(timezone('UTC'))
+
+    # Determines current day of the week in PST and determines the string
+    #  value from days_dict
+    day = DAYS_DICT[now_utc.astimezone(timezone(user_timezone)).weekday()]
+
+    #  Searches db for markets on current day
+    results = Market.query.filter(Market.market_day == day)
+
+    markets = {}
+
+    for market in results:
+        market_data = {
+            "marketId": market.market_id,
+            "name": market.market_name,
+            "startTime": market.market_start.strftime('%I:%M %p'),
+            "endTime": market.market_end.strftime('%I:%M %p'),
+            "address": market.market_address
+        }
+        markets[market.market_name] = market_data
+
+    return jsonify(markets)
 
 
 @app.route('/search', methods=['GET', 'POST'])

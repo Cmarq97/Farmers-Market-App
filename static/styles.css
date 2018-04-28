@@ -7,27 +7,27 @@ body {
     padding: 20px;
 }
 
+.border {
+    border-bottom-style: solid;
+    border-color: YellowGreen;
+    border-width: medium;
+    padding-bottom: 10px;
+    margin-bottom: 28px;
+}
 
 #form {
     background-color: FloralWhite;
     padding: 20px;
 }
 
-#nav-link{
-    color: white;
-    text-decoration: none;
-  }
-
 .green{
     background-color: YellowGreen;
-}
-.blue{
-  background-color: Blue;
 }
 
 #link{
     background-color: White
 }
+
 #market-map{
     height: 400px;
     width: 400px;

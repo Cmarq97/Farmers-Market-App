@@ -4,6 +4,7 @@
 <head>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
     <link href="/static/styles.css" rel="stylesheet">
+    
     <title>Bay Area Farmer's Markets</title>
 </head>
 
@@ -11,15 +12,15 @@
 <img src="http://www.fortvalleymainstreet.org/userfiles/Image/find-farmers-markets.jpg" class="center" style="padding-top:10px;">
 </div>
 <!-- ------------------------------- NAV BAR ------------------------------- -->
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" style="background-color: DarkKhaki;">
+<nav class="navbar navbar-expand-lg fixed-top navbar-default" style="background-color: YellowGreen;">
     <div class="container-fluid">
     <div class="navbar-header">
         <span class="navbar-brand">Bay Area Farmer's Markets</span>
     </div>
     <ul class="nav navbar-nav">
-        <li class="active"><a href="/">Home</a></li>
-        <li><a href="/markets" class="nav-link">View Markets</a></li>
-        <li><a href="/vendors" class="nav-link">View Vendors</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/markets">View Markets</a></li>
+        <li><a href="/vendors">View Vendors</a></li>
         {% if "user_id" in session %}
             <li><a href="/logout">Logout</a></button></li>
         {% else %}

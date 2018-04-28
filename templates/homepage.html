@@ -2,30 +2,31 @@
 
 {% block content %}
 
+<script src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}"></script>
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="/static/todaysMktsMap.js"></script>
+<script src="/static/mapstyles.js"></script>
+
+
 <div class="container-fluid">
-    
-    <div class="row">
- <!--        <div class="col-xs-2"></div>
-        <div class="col-xs-8 green">
-            <img src="/static/img/farmers-market.jpg" style="height:300px; width:300px;">
-            <h1>Today's Farmer's Markets</h1>
-            <ul>
-                {% for market in markets %}
-                    <li><a href="/markets/{{ market.market_id }}">{{ market.market_name }}</a></li>
-                {% endfor %}
-            </ul>
-        </div> -->
-    </div>
 
     <div class="row">
         <div class="col-xs-1"></div>
         <div class="col-xs-4 green">
-            <img src="/static/img/farmers-market.jpg" style="height:150px; width:500px;">
+            <div class="cream" style="margin: 20px; padding: 10px;">
+                <h1 class="border">Farmer's Markets Today</h1>
             <ul>
                 {% for market in markets %}
-                    <li><a href="/markets/{{ market.market_id }}">{{ market.market_name }}</a></li>
+                    <ul> 
+                        <li><b>{{ market.market_name }}</b><br>
+                        <b>Hours: </b> {{ market.market_start.strftime('%I:%M %p') }}-{{ market.market_end.strftime('%I:%M %p') }}<br> 
+                        <b>Location: </b> {{market.market_address}}<br></li> 
+                        <a href="/markets/{{ market.market_id }}">Link to {{ market.market_name }} Page</a>
+                    </ul>
                 {% endfor %}
             </ul>
+            <div id="market-map" style="margin: 20px; padding: 10px;"></div>
+        </div>
         </div>
 
 
@@ -61,11 +62,25 @@
                     </h4>
                     </div>
                     <br>
-                    <input type="submit" class="btn-success btn btn-block" name="submit" value="Search">
+                    <input id="search" type="submit" class="btn-success btn btn-block" name="submit" value="Search">
                 </div>
             </form>
         </div>
     </div> 
 </div>
+<div class="row">
+    <div id="results"></div>
+</div>
 
+// <script>
+
+// $(document).ready(function() {
+
+//     document.getElementById("search").onclick = function (event) {
+//         event.preventDefault();
+//         $("#results").load("results.html");
+//     }
+// })
+
+// </script>
 {% endblock %}

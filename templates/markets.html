@@ -9,21 +9,29 @@
 </head>
 
 <div class="container-fluid">
-    <h1> Markets </h1>
-    <p>List of all Markets in our database:</p>
-    
+    <div class="row green">
+        <div class="cream" style="margin: 20px; padding: 10px;">
+        <h1 class="border"> Markets </h1>
+        </div>
+    </div>
+    <br><br>
     <div class="row">
-        <div class="col-xs-4">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-5 green">
+            <div class="cream" style="margin: 20px; padding: 10px;">
+            <h2 class="border">List of all Markets in our database:</h2>
             <ul>
                 <!--Lists all markets in markets table and allows each name to be a clickable link leading to the market profile page-->
                 {% for market in markets %}
-                  <li><a href="/markets/{{ market.market_id }}">{{ market.market_name }}</a></li>
+                  <h4><li><a href="/markets/{{ market.market_id }}">{{ market.market_name }}</a></li></h4>
                 {% endfor %}
             </ul>
         </div>
-        <div class="col-xs-6">
+        </div>
+        <div class="col-xs-5">
             <div id="market-map"></div>
         </div>
     </div>
+    <br><br><br>
 </div>
 {% endblock %}
