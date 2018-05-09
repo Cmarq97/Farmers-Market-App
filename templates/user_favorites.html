@@ -2,27 +2,37 @@
 {% block content %}
 
 <div class="container-fluid">
-    <div class="row">
-    <h1>{{ user.email }}'s Favorites!</h1>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <b>Favorite Markets</b>
-            <ul>
-            {% for market in fav_markets %}
-                <li><a href="/markets/{{ market.market_id }}">{{ market.market_name }}</a></li>
-            {% endfor %}
-            </ul>
-        </div>
-        <div class="col-xs-6">
-            <b>Favorite Vendors</b>
-            <ul>
-            {% for vendor in fav_vendors %}
-                <li><a href="/vendors/{{ vendor.vendor_id }}">{{ vendor.vendor_name }}</a></li>
-            {% endfor %}
-            </ul>
+    <div class="row green">
+        <div class="cream" style="margin: 20px; padding: 10px;">
+        <h1 class="border"> Welcome {{ user.email }}!</h1>
         </div>
     </div>
+    <br><br>
+    <div class="row">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-4 green">
+            <div class="cream" style="margin: 20px; padding: 10px;">
+                <h2 class="border">Favorite Markets:</h2>
+                <ul>
+                    {% for market in fav_markets %}
+                      <h4><li><a href="/markets/{{ market.market_id }}">{{ market.market_name }}</a></li></h4>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-2"></div>
+        <div class="col-xs-4 green">
+            <div class="cream" style="margin: 20px; padding: 10px;">
+            <h2 class="border">Favorite Vendors:</h2>
+            <ul>
+                {% for vendor in fav_vendors %}
+                  <h4><li><a href="/vendors/{{ vendor.vendor_id }}">{{ vendor.vendor_name }}</a></li></h4>
+                {% endfor %}
+            </ul>
+            </div>
+        </div>
+    </div>
+    <br><br><br>
 </div>
 
 

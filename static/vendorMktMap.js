@@ -1,9 +1,9 @@
-function initMap() {
+function initVendorMktMap() {
     // Specify where the map is centered
     let myLatLng = {lat: 37.3, lng: -122};
 
     // Create a map object and specify the DOM element for display.
-    let map = new google.maps.Map(document.getElementById('market-map'), {
+    let map = new google.maps.Map(document.getElementById('vendors-markets-map'), {
         center: myLatLng,
         scrollwheel: false,
         zoom: 8,
@@ -87,4 +87,6 @@ function initMap() {
 }
 
 //waits for page to fully load before executing JavaScript
-google.maps.event.addDomListener(window, 'load', initMap);
+google.maps.event.addDomListener(window, 'load', initVendorMktMap);
+google.maps.event.addDomListener(window, 'page:load', initVendorMktMap);
+// document.addEventListener("turbolinks:load", initVendorMktMap);

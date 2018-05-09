@@ -2,58 +2,72 @@
 
 {% block content %}
 <script src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}"></script>
-<script src="https://code.jquery.com/jquery.js"></script>
+    
 <script src="/static/vendorMktMap.js"></script>
-<script src="/static/mapstyles.js"></script>
-<script src="/static/favorite.js"></script>
-
-<input id='vendor_id' type='hidden' value={{ vendor.vendor_id }}>
+<script src="/static/favoriteVend.js"></script>
 
 <div class='container-fluid'>
+<input id='vendor_id' type='hidden' value={{ vendor.vendor_id }}>
 
-<h1>{{ vendor.vendor_name }}</h1>
-
-<h3>Vendor Info</h3>
-
-<form action="/vendors/{{ vendor.vendor_id }}" method="post">
-        <label>Favorite this Vendor:
-          <input type="hidden" name="favorite" value={{ vendor.vendor_id }}>
-        </label>
-        <input id="favorite" type="submit" value="Favorite">
-</form>
-
-
-<div class="row">
-    <div class="col-xs-4 col-xs-2-offset"> 
-        <img src='/static/img/Flip/{{ vendor.vendor_name }}.jpg' style="width: 400px; height: 400px;">
-        <ul>
-            <b>Commodities:</b><br>
-            {% for commodity in commodities %}
-                <li>{{ commodity }}</li>
-            {% endfor %}
-        </ul><br>
-
-        <ul>
-        {% if vendor.credit %}
-            <li><img src="/static/img/Icons/shopping-store.png"> Accepts Credit Cards</li>
-        {% endif %}
-        {% if vendor.organic %}
-            <li><img src="/static/img/Icons/organic.png"></li>
-        {% endif %}
-        </ul>
-        
-        <ul>
-            <b>Markets:</b><br>
-            {% for market in vendor.markets %}
-                <li><a href="/markets/{{ market.market_id }}">{{ market.market_name }}</a></li>
-            {% endfor %}
-        </ul>
+    <div class="row green">
+        <div class="cream" style="margin: 20px; padding: 10px;">
+            <div class="row">
+                <div class="col-xs-10">
+                    <h1 class="border"> {{ vendor.vendor_name }} </h1>
+                </div>
+                <div class="col-xs-2 pull-right">
+                    <br><br>  
+                    <form action="/vendors/{{ vendor.vendor_id }}" method="post">
+                            <h4>Favorite this Vendor:&nbsp;
+                              <input type="hidden" name="favorite" value={{ vendor.vendor_id }}>
+                            <input id="favorite" class="btn btn-default btn-success" type="submit" value="Favorite"></h4>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-        
-    <div class="col-xs-6">
-        <div id="market-map"></div>
+    <br><br>
+
+    <div class='row'>
+        <div class="col-xs-1"></div>
+        <div class='col-xs-4 green'>
+            <div class="cream">
+                <h2 class="border">Vendor Info</h2>
+
+                <div class="row">
+                    <div class="col-xs-10 col-xs-2-offset"> 
+                        {% if vendor.credit %}
+                            <h4><img src="/static/img/Icons/shopping-store.png"> Accepts Credit Cards</h4>
+                        {% endif %}
+                        {% if vendor.organic %}
+                            <h4><img src="/static/img/Icons/organic.png"></h4>
+                        {% endif %}
+                        
+                        <h3 class="border">Commodities:</h3>
+                        <ul>
+                        {% for commodity in commodities %}
+                            <li><h4>{{ commodity }}</h4></li>
+                        {% endfor %}
+                        </ul><br>
+
+                        <h3 class="border">Find {{ vendor.vendor_name }} at These Markets:</h3>
+                        <ul>
+                            {% for market in vendor.markets %}
+                                <li><h4><a href="/markets/{{ market.market_id }}">{{ market.market_name }}</a></h4></li>
+                            {% endfor %}
+                        </ul>
+                        <div id="vendors-markets-map" class="center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-1"></div>
+        <div class='col-xs-4'>
+                <img src='/static/img/Flip/{{ vendor.vendor_name }}.jpg' style="width: 400px; height: 400px;">
+                <br><br><br>
+        </div>
     </div>
-</div>
+    <br><br><br>
 </div>
 {% endblock %}
 

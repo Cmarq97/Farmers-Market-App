@@ -127,13 +127,13 @@ def example_data():
     MarketVendor.query.delete()
 
     mry = Market(market_name="Monterey Farmer's Market", market_day='Tuesday', market_start='16:00',
-                 market_end='20:00', market_address='Alvarado St Monterey, CA 93940')
+                 market_end='20:00', market_address='Alvarado St Monterey CA 93940')
 
     pls = Market(market_name="Pleasonton Farmer's Market", market_day='Saturday', market_start='09:00',
-                 market_end='13:00', market_address='424 Main St. Pleasonton, CA')
+                 market_end='13:00', market_address='424 Main St. Pleasonton CA')
 
     dan = Market(market_name="Danville Farmer's Market", market_day='Saturday', market_start='09:00',
-                 market_end='13:00', market_address='205 Railroad Ave. Danville, CA')
+                 market_end='13:00', market_address='205 Railroad Ave. Danville CA')
 
     sun = Vendor(vendor_name='Sunrise Nursery', vendor_website='',
                  vendor_commodity='Cut Flowers|Eggs', map_icon='/static/img/sunflower.png',

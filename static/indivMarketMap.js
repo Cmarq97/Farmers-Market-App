@@ -1,8 +1,8 @@
-function initMap() {
+function initIndivMktMap() {
     let myLatLng = {lat: 37, lng: -121};
 
     // Create a map object and specify the DOM element for display.
-    let map = new google.maps.Map(document.getElementById('market-map'), {
+    let map = new google.maps.Map(document.getElementById('indiv-market-map'), {
         center: myLatLng,
         scrollwheel: false,
         zoom: 8,
@@ -46,4 +46,6 @@ function initMap() {
     })
 }
 //waits for page to fully load before executing JavaScript
-google.maps.event.addDomListener(window, 'load', initMap);
+google.maps.event.addDomListener(window, 'load', initIndivMktMap);
+google.maps.event.addDomListener(window, 'page:load', initIndivMktMap);
+// document.addEventListener("turbolinks:load", initIndivMktMap);

@@ -28,7 +28,7 @@ body {
     background-color: White
 }
 
-#market-map{
+#today-market-map, #indiv-market-map, #all-markets-map, #vendors-markets-map {
     height: 400px;
     width: 400px;
 }
@@ -74,11 +74,14 @@ body {
   background: YellowGreen;
   color: white;
   cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 400px;
+  height: 200px;
 }
 .flip .card .back {
-    /*background: blue;*/
-    background: white;
-    /*color: black;*/
+    /*background-color: YellowGreen;*/
+    background-image: url('/static/img/barn.jpg');
     cursor: pointer;
     
   transform:rotatey(-180deg);

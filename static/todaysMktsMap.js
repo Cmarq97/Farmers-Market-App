@@ -3,7 +3,7 @@ function initMap() {
     let myLatLng = {lat: 37.3, lng: -122};
 
     // Create a map object and specify the DOM element for display.
-    let map = new google.maps.Map(document.getElementById('market-map'), {
+    let map = new google.maps.Map(document.getElementById('today-market-map'), {
         center: myLatLng,
         scrollwheel: false,
         zoom: 8,
@@ -88,3 +88,5 @@ function initMap() {
 
 //waits for page to fully load before executing JavaScript
 google.maps.event.addDomListener(window, 'load', initMap);
+google.maps.event.addDomListener(window, 'page:load', initMap);
+// document.addEventListener("turbolinks:load", initMap);

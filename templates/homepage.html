@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<script src="/static/autocomplete.js"></script>
+<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}"></script>
-<script src="https://code.jquery.com/jquery.js"></script>
 <script src="/static/todaysMktsMap.js"></script>
-<script src="/static/mapstyles.js"></script>
-
 
 <div class="container-fluid">
 
@@ -25,7 +25,7 @@
                     </ul>
                 {% endfor %}
             </ul>
-            <div id="market-map" style="margin: 20px; padding: 10px;"></div>
+            <div id="today-market-map" style="margin: 20px; padding: 10px;"></div>
         </div>
         </div>
 
@@ -35,18 +35,22 @@
                 <div class="form-group">
                     <div class="form-horizantal">
                         <h2>Search Your Local Farmer's Markets!
-                           <a href="/markets" class="btn btn-default btn-success" style="margin-left:25px;"><h4>View all Markets</h4></a>
-                           <a href="/vendors" class="btn btn-default btn-success" style="margin-left:25px;"><h4>View all Vendors</h4></a></h2>
+                           <a href="/markets" class="btn btn-default btn-success" style="margin-left:25px;"><h5>View all Markets</h5></a>
+                           <a href="/vendors" class="btn btn-default btn-success" style="margin-left:25px;"><h5>View all Vendors</h5></a></h2>
                         </div>
                         <h3>Search By: </h3>
                         <div class="btn-group">
                         <input type="radio" name="search_by" value="vendor"> Vendor Name &nbsp;
                         <input type="radio" name="search_by" value="commodity"> Vendor Commodity &nbsp;
                         <input type="radio" name="search_by" value="market"> Market Name &nbsp;
-                        <input type="radio" name= "search_by"value="address"> Market Address &nbsp;
+                        <input type="radio" name= "search_by" value="address"> Market Address &nbsp;
                         </div>
+
+                        <div class="ui-widget">
                         <br><br><h3>Search Keyword:</h3>
-                        <input type="text" name="keyword" class="form-control">
+                        <input id="autocomplete" type="text" name="keyword" class="form-control">
+                        </div>
+                        
                     </div><br>
                     <h3>Filter Results By:</h3>
                     <div class="btn-group-justified">
@@ -63,24 +67,35 @@
                     </div>
                     <br>
                     <input id="search" type="submit" class="btn-success btn btn-block" name="submit" value="Search">
+                    <div id="results"></div>
                 </div>
             </form>
         </div>
     </div> 
 </div>
-<div class="row">
-    <div id="results"></div>
-</div>
 
-// <script>
 
-// $(document).ready(function() {
+<script>
+// Displays search results underneath the search form w/out reloading!
+$(document).ready(function() {
 
-//     document.getElementById("search").onclick = function (event) {
-//         event.preventDefault();
-//         $("#results").load("results.html");
-//     }
-// })
+    document.getElementById("search").onclick = function (event) {
+        event.preventDefault();
+        var data= $('form').serialize(); //serializes form data for use
 
-// </script>
+        $.post('/search', data, function (result){
+
+            $("#results").html(result);
+            //Add failure clauses for no keyword && no search by values!
+        });
+
+        //on click, after loading of results, scrollls to top of #results div
+        $('html, body').animate({
+        scrollTop: $("#results").offset().top}, 1500);
+    };
+});
+
+</script>
+
+
 {% endblock %}

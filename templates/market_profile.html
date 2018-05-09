@@ -1,14 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<head>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}"></script>
-<script src="https://code.jquery.com/jquery.js"></script>
+    
 <script src="/static/indivMarketMap.js"></script>
-<script src="/static/mapstyles.js"></script>
 <script src="/static/weather.js"></script>
-<script src="/static/favorite.js"></script>
-</head>
+<script src="/static/favoriteMkt.js"></script>
 
 
 <div class="container-fluid">
@@ -24,7 +21,7 @@
                     <br><br>
                     <form action="/markets/{{ market.market_id }}" method="post">
                         <h4>Favorite this Market:&nbsp;
-                          <input type="hidden" name="favorite" value={{ market.market_id }}>
+                          <!-- <input type="hidden" name="favorite" value={{ market.market_id }}> -->
                         
                         <input id="favorite" class="btn btn-default btn-success" type="submit" value="Favorite"></h4>
                     </form>
@@ -63,7 +60,7 @@
 
         <div class="col-xs-1"></div>
         <div class='col-xs-3'>
-                <div id="market-map"></div>
+                <div id="indiv-market-map"></div>
         </div>
     </div>
     <br><br><br>

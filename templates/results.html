@@ -1,7 +1,5 @@
-{% extends 'base.html' %}
-
-{% block content %}
-<h1> Search Results:</h1>
+<br><br>
+<h1 class="border"> Search Results:</h1>
 
 
 {% if search == 'market' or search == 'address' %}
@@ -28,5 +26,4 @@
 {% endfor %}
 
 {% endif %}
-<p> End of Results. </p>
-{% endblock %}
+<div class="green" style="text-align:center;border:1px solid ForestGreen"><b>End of Results</b></div>

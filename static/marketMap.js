@@ -1,10 +1,10 @@
-function initMap() {
+$(document).ready(function(){
 
     // Specify where the map is centered
     let myLatLng = {lat: 37.4, lng: -122};
 
     // Create a map object and specify the DOM element for display.
-    let map = new google.maps.Map(document.getElementById('market-map'), {
+    let map = new google.maps.Map(document.getElementById('all-markets-map'), {
         // center: myLatLng,
         scrollwheel: false,
         zoom: 8,
@@ -33,15 +33,6 @@ function initMap() {
 
     // Retrieving the information with AJAX
     $.get('/markets.json', function (markets) {
-      // JSON looks like:
-    // address = " ".join([market.address.address_street, market.address.address_city, market.address.address_state])
-    // market_data = {
-    // "marketId": market.market_id,
-    // "day": market.market_day,
-    // "startTime": market.market_start.strftime('%I:%M %p'),
-    // "endTime": market.market_end.strftime('%I:%M %p'),
-    // "address": address
-    // }
 
       let market, marker, html;
 
@@ -86,7 +77,6 @@ function initMap() {
         });
     }
 }
-}
-
-//waits for page to fully load before executing JavaScript
-google.maps.event.addDomListener(window, 'load', initMap);
+});
+// //waits for page to fully load before executing JavaScript
+// google.maps.event.addDomListener(window, 'load', initMktMap);
